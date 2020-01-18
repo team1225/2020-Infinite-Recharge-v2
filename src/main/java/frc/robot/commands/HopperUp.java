@@ -8,13 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hopper;
 
-public class HooperUp extends CommandBase {
+public class HopperUp extends CommandBase {
   /**
    * Creates a new HooperUp.
    */
-  public HooperUp() {
+  public HopperUp(Hopper hopper) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.

@@ -14,11 +14,17 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.HopperDown;
+import frc.robot.commands.HopperUp;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Wench;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.WenchUp;
 import frc.robot.commands.WenchDown;
+import frc.robot.Constants.UpDown;
+import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,7 +40,9 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Wench m_wench = new Wench();
   private final Drivetrain m_drivetrain = new Drivetrain();
-
+  private final ColorWheel m_colorwheel = new ColorWheel();
+  private final Hopper m_hopper = new Hopper();
+  
   private final Joystick m_joystick = new Joystick(0);
   
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -56,10 +64,18 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final JoystickButton r1 = new JoystickButton(m_joystick, RobotMap.BUTTON_A);
-    final JoystickButton l1 = new JoystickButton(m_joystick, RobotMap.BUTTON_B);
-    l1.whileHeld(new WenchUp(m_wench));
-    r1.whileHeld(new WenchDown(m_wench));
+    final JoystickButton Button_A = new JoystickButton(m_joystick, RobotMap.BUTTON_A);
+    final JoystickButton Button_B = new JoystickButton(m_joystick, RobotMap.BUTTON_B);
+    final JoystickButton Button_X = new JoystickButton(m_joystick, RobotMap.BUTTON_X);
+    final JoystickButton Button_Y = new JoystickButton(m_joystick, RobotMap.BUTTON_Y);
+    final JoystickButton Button_L1 = new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER);
+    final JoystickButton Button_R1 = new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER);
+    Button_A.whileHeld(new WenchUp(m_wench));
+    Button_B.whileHeld(new WenchDown(m_wench));
+    Button_X.whenHeld(new HopperDown(m_hopper));
+    Button_Y.whenHeld(new HopperUp(m_hopper));
+    Button_L1.whenPressed(new ChangeMaxSpeed(m_drivetrain, UpDown.Down));
+    Button_R1.whenPressed(new ChangeMaxSpeed(m_drivetrain, UpDown.Up));
   }
 
 

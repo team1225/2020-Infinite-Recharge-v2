@@ -30,11 +30,11 @@ public class Wench extends SubsystemBase {
   }
 
   public void lower() {
-    m_motorLeader.set(-1);
+    m_motorLeader.set(-0.25);
   }
 
 public void raise() {
-    m_motorLeader.set(1);
+    m_motorLeader.set(0.25);
 }
 
 public void stop() {

@@ -16,4 +16,18 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-}
+    public static enum UpDown {Up, Down};
+    public static enum Speeds {low (0), low_mid (1), mid (2), high_mid (3), high (4);
+        private final int gear;
+        public static final double maxSpeeds[] = {0.20, 0.35, 0.50, 0.65, 0.80};
+        Speeds(final int gear) {
+            this.gear = gear;
+        }
+        public int gear() { return this.gear; };
+        public double speed() { return maxSpeeds[this.gear]; }
+        public static double speed(final int gear) {
+            return maxSpeeds[gear];
+        }
+    };
+
+ }
