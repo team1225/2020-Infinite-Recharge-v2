@@ -18,13 +18,15 @@ import frc.robot.commands.HopperDown;
 import frc.robot.commands.HopperUp;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hopper;
+import frc.robot.commands.HopperOut;
+import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.WenchUp;
 import frc.robot.commands.WenchDown;
-import frc.robot.Constants.UpDown;
-import frc.robot.commands.ChangeMaxSpeed;
+// import frc.robot.Constants.UpDown;
+// import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -52,7 +54,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(new Drive(() -> m_joystick.getY(Hand.kLeft),
-        () -> m_joystick.getY(Hand.kRight), m_drivetrain));
+        () -> m_joystick.getX(Hand.kRight), m_drivetrain));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -64,6 +66,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
     final JoystickButton Button_A = new JoystickButton(m_joystick, RobotMap.BUTTON_A);
     final JoystickButton Button_B = new JoystickButton(m_joystick, RobotMap.BUTTON_B);
     final JoystickButton Button_X = new JoystickButton(m_joystick, RobotMap.BUTTON_X);
@@ -74,8 +77,8 @@ public class RobotContainer {
     Button_B.whileHeld(new WenchDown(m_wench));
     Button_X.whenHeld(new HopperDown(m_hopper));
     Button_Y.whenHeld(new HopperUp(m_hopper));
-    Button_L1.whenPressed(new ChangeMaxSpeed(m_drivetrain, UpDown.Down));
-    Button_R1.whenPressed(new ChangeMaxSpeed(m_drivetrain, UpDown.Up));
+    Button_L1.whenHeld(new HopperIn(m_hopper));
+    Button_R1.whenHeld(new HopperOut(m_hopper));
   }
 
 

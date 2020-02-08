@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 
 public class Hopper extends SubsystemBase {
-  private PWMTalonSRX m_motor = new PWMTalonSRX(0);
+  private PWMTalonSRX m_LiftMotor = new PWMTalonSRX(0);
+  private PWMTalonSRX m_IntakeMotor = new PWMTalonSRX(1);
   /**
    * Creates a new Hooper.
    */
@@ -26,14 +27,24 @@ public class Hopper extends SubsystemBase {
   }
 
   public void raise() {
-    m_motor.set(0.1);
+    m_LiftMotor.set(0.5);
   }
 
   public void lower() {
-    m_motor.set(-0.1);
+    m_LiftMotor.set(-0.5);
   }
 
-  public void stop() {
-    m_motor.set(0);
+  public void stopLift() {
+    m_LiftMotor.set(0);
+  }
+
+  public void in() {
+    m_IntakeMotor.set(-1);
+  }
+  public void out() {
+    m_IntakeMotor.set(1);
+  }
+  public void inStop() {
+    m_IntakeMotor.set(0);
   }
 }

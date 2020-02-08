@@ -10,33 +10,36 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
-public class HopperDown extends CommandBase {
-private Hopper m_hopper;
+public class HopperIn extends CommandBase {
   /**
-   * Creates a new HooperDown.
+   * Creates a new HopperIn.
    */
-  public HopperDown(Hopper hopper) {
-    m_hopper = hopper;
+  private Hopper m_hopper;
+
+  public HopperIn(Hopper hopper) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(hopper);
+    m_hopper = hopper;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_hopper.lower();
+    m_hopper.in();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_hopper.stopLift();
+    m_hopper.inStop();
   }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

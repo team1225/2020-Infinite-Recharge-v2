@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
 public class HopperUp extends CommandBase {
+  private Hopper m_hopper;
   /**
    * Creates a new HooperUp.
    */
   public HopperUp(Hopper hopper) {
+    m_hopper = hopper;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(hopper);
   }
@@ -27,11 +29,13 @@ public class HopperUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_hopper.raise();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_hopper.stopLift();
   }
 
   // Returns true when the command should end.

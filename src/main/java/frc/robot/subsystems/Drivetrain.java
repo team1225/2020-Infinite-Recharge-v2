@@ -13,9 +13,10 @@ import frc.robot.Constants.UpDown;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
+// import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Drivetrain extends SubsystemBase {
@@ -27,9 +28,9 @@ public class Drivetrain extends SubsystemBase {
   private int maxSpeedSetting;
   private Double maxSpeed; 
 
-  public final int rightMotorCANId = 1;
-  public final int leftMotorCANId = 2;  
-  public final double rampRate = 0.5;
+  public final int rightMotorCANId = 10;
+  public final int leftMotorCANId = 7;  
+  public final double rampRate = 1.0;
 
   /**
    * Creates a new Drivetrain.
@@ -37,7 +38,7 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     // Set the default "gear" and speed
     maxSpeedSetting = Constants.Speeds.high_mid.gear();
-    maxSpeed = Constants.Speeds.high_mid.speed();
+    maxSpeed = 0.2;// Constants.Speeds.high_mid.speed();
 
     // Get motors
     m_leftMotor = new CANSparkMax(leftMotorCANId, MotorType.kBrushless);
@@ -56,6 +57,8 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Max Speed", maxSpeed);
+
   }
 
   public void drive(Double speed, Double rotation) {
@@ -69,14 +72,14 @@ public class Drivetrain extends SubsystemBase {
     m_drive.arcadeDrive(0, 0);
   }
 
-  public void ChangeMaxSpeed(UpDown direction) {
-    if (direction == UpDown.Up && maxSpeedSetting < 4) {
-      maxSpeedSetting += 1;
-      maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-    } 
-    if (direction == UpDown.Down && maxSpeedSetting > 0) {
-      maxSpeedSetting -= 1;
-      maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-    }
-  }
+  // public void ChangeMaxSpeed(UpDown direction) {
+  //   if (direction == UpDown.Up && maxSpeedSetting < 4) {
+  //     maxSpeedSetting += 1;
+  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
+  //   } 
+  //   if (direction == UpDown.Down && maxSpeedSetting > 0) {
+  //     maxSpeedSetting -= 1;
+  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
+  //   }
+  // }
 }

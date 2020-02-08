@@ -16,7 +16,7 @@ import frc.robot.subsystems.Drivetrain;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ChangeMaxSpeed extends InstantCommand {
   public ChangeMaxSpeed( Drivetrain drivetrain, UpDown direction) {
-    drivetrain.ChangeMaxSpeed(direction);
+    // drivetrain.ChangeMaxSpeed(direction);
   }
 
   // Called when the command is initially scheduled.
