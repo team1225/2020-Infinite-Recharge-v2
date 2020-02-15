@@ -11,12 +11,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 
-public class Hopper extends SubsystemBase {
-  private PWMTalonSRX m_IntakeMotor = new PWMTalonSRX(1);
+import edu.wpi.first.wpilibj.DigitalInput;
+
+public class Arm extends SubsystemBase {
+  private PWMTalonSRX m_ArmMotor = new PWMTalonSRX(0);
+  private DigitalInput m_Down = new DigitalInput(0);
+  private DigitalInput m_Up = new DigitalInput(1);
+
   /**
-   * Creates a new Hooper.
+   * Creates a new Arm.
    */
-  public Hopper() {
+  public Arm() {
 
   }
 
@@ -24,15 +29,22 @@ public class Hopper extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-
-
-  public void in() {
-    m_IntakeMotor.set(-1);
+  public void raise() {
+    m_ArmMotor.set(1);
   }
-  public void out() {
-    m_IntakeMotor.set(1);
+  
+  public void lower (){
+    m_ArmMotor.set(1);
   }
-  public void inStop() {
-    m_IntakeMotor.set(0);
+  public void stop() {
+    m_ArmMotor.set(0);
+  }
+
+  public boolean isDown() {
+  return m_Down.get();
+  }
+
+  public boolean isUp (){
+    return m_Up.get();
   }
 }

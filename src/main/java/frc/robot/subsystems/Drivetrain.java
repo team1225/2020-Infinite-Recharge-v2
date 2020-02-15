@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.Constants.UpDown;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -29,7 +28,7 @@ public class Drivetrain extends SubsystemBase {
   private Double maxSpeed; 
 
   public final int rightMotorCANId = 10;
-  public final int leftMotorCANId = 7;  
+  public final int leftMotorCANId = 4;  
   public final double rampRate = 1.0;
 
   /**
@@ -58,7 +57,6 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Max Speed", maxSpeed);
-
   }
 
   public void drive(Double speed, Double rotation) {

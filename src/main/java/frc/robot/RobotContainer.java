@@ -14,17 +14,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.HopperDown;
-import frc.robot.commands.HopperUp;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.WenchUp;
 import frc.robot.commands.WenchDown;
+import frc.robot.commands.ArmLoading;
+import frc.robot.commands.ArmPickup;
 // import frc.robot.Constants.UpDown;
 // import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
@@ -44,6 +45,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final ColorWheel m_colorwheel = new ColorWheel();
   private final Hopper m_hopper = new Hopper();
+  private final Arm m_arm = new Arm();
   
   private final Joystick m_joystick = new Joystick(0);
   
@@ -75,8 +77,8 @@ public class RobotContainer {
     final JoystickButton Button_R1 = new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER);
     Button_A.whileHeld(new WenchUp(m_wench));
     Button_B.whileHeld(new WenchDown(m_wench));
-    Button_X.whenHeld(new HopperDown(m_hopper));
-    Button_Y.whenHeld(new HopperUp(m_hopper));
+    Button_X.whenHeld(new ArmLoading(m_arm));
+    Button_Y.whenHeld(new ArmPickup(m_arm));
     Button_L1.whenHeld(new HopperIn(m_hopper));
     Button_R1.whenHeld(new HopperOut(m_hopper));
   }
