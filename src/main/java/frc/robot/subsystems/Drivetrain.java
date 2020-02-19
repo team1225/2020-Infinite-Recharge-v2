@@ -36,7 +36,6 @@ public class Drivetrain extends SubsystemBase {
    */
   public Drivetrain() {
     // Set the default "gear" and speed
-    maxSpeedSetting = Constants.Speeds.high_mid.gear();
     maxSpeed = 0.2;// Constants.Speeds.high_mid.speed();
 
     // Get motors
@@ -69,15 +68,4 @@ public class Drivetrain extends SubsystemBase {
   public void Stop() {
     m_drive.arcadeDrive(0, 0);
   }
-
-  // public void ChangeMaxSpeed(UpDown direction) {
-  //   if (direction == UpDown.Up && maxSpeedSetting < 4) {
-  //     maxSpeedSetting += 1;
-  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-  //   } 
-  //   if (direction == UpDown.Down && maxSpeedSetting > 0) {
-  //     maxSpeedSetting -= 1;
-  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-  //   }
-  // }
 }
