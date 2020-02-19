@@ -45,6 +45,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
 import java.util.List;
@@ -100,7 +102,7 @@ public class RobotContainer {
     new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenHeld(new ArmPickup(m_arm));
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
-    new JoystickButton(m_joystick, Button.kBumperRight.value)
+    new POVButton(m_joystick, 270)
         .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
         .whenReleased(() -> m_robotDrive.setMaxOutput(1));
   }
