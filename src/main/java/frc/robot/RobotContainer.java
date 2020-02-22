@@ -102,9 +102,9 @@ public class RobotContainer {
     new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenHeld(new ArmPickup(m_arm));
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
-    new POVButton(m_joystick, 270)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
-        .whenReleased(() -> m_robotDrive.setMaxOutput(1));
+    new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
+        .whenPressed(() -> m_robotDrive.setMaxOutput(1.0))
+        .whenReleased(() -> m_robotDrive.setMaxOutput(0.5));
   }
 
 
