@@ -13,8 +13,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.HopperIn;
@@ -30,6 +28,7 @@ import frc.robot.commands.ColorControl;
 // import frc.robot.Constants.UpDown;
 // import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveForward;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -42,7 +41,6 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Wench m_wench = new Wench();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final ColorWheel m_colorwheel = new ColorWheel();
@@ -50,9 +48,8 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   
   private final Joystick m_joystick = new Joystick(0);
+  private final DriveForward m_DriveForward = new DriveForward(m_drivetrain);
   
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -91,6 +88,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_DriveForward.withTimeout(3);
   }
 }
