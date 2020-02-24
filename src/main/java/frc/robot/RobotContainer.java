@@ -26,11 +26,13 @@ import frc.robot.commands.WenchUp;
 import frc.robot.commands.WenchDown;
 import frc.robot.commands.ArmLoading;
 import frc.robot.commands.ArmPickup;
+import frc.robot.commands.ColorControl;
 // import frc.robot.Constants.UpDown;
 // import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -55,7 +57,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drivetrain.setDefaultCommand(new Drive(() -> m_joystick.getY(Hand.kLeft),
+    m_drivetrain.setDefaultCommand(new Drive(() -> -m_joystick.getY(Hand.kLeft),
         () -> m_joystick.getX(Hand.kRight), m_drivetrain));
     // Configure the button bindings
     configureButtonBindings();
@@ -69,18 +71,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    final JoystickButton Button_A = new JoystickButton(m_joystick, RobotMap.BUTTON_A);
-    final JoystickButton Button_B = new JoystickButton(m_joystick, RobotMap.BUTTON_B);
-    final JoystickButton Button_X = new JoystickButton(m_joystick, RobotMap.BUTTON_X);
-    final JoystickButton Button_Y = new JoystickButton(m_joystick, RobotMap.BUTTON_Y);
-    final JoystickButton Button_L1 = new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER);
-    final JoystickButton Button_R1 = new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER);
-    Button_A.whileHeld(new WenchUp(m_wench));
-    Button_B.whileHeld(new WenchDown(m_wench));
-    Button_X.whenHeld(new ArmLoading(m_arm));
-    Button_Y.whenHeld(new ArmPickup(m_arm));
-    Button_L1.whenHeld(new HopperIn(m_hopper));
-    Button_R1.whenHeld(new HopperOut(m_hopper));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_A).whileHeld(new WenchUp(m_wench));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_B).whileHeld(new WenchDown(m_wench));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whenPressed(new ArmLoading(m_arm));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(m_arm));
+    new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
+    new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
+    new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
   }
 
 

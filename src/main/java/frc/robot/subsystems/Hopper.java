@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 
 public class Hopper extends SubsystemBase {
-  private PWMTalonSRX m_IntakeMotor = new PWMTalonSRX(1);
+  private PWMTalonSRX m_IntakeMotor = new PWMTalonSRX(0);
   /**
    * Creates a new Hooper.
    */

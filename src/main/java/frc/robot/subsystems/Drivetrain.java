@@ -28,7 +28,7 @@ public class Drivetrain extends SubsystemBase {
   private Double maxSpeed; 
 
   public final int rightMotorCANId = 10;
-  public final int leftMotorCANId = 4;  
+  public final int leftMotorCANId = 7;  
   public final double rampRate = 1.0;
 
   /**
@@ -64,7 +64,7 @@ public class Drivetrain extends SubsystemBase {
   }
   
   public void drive(Joystick joystick) {
-    m_drive.arcadeDrive(joystick.getY() * maxSpeed, joystick.getRawAxis(RobotMap.X_RIGHT_STICK_X) * maxSpeed);
+    m_drive.arcadeDrive(joystick.getY(), joystick.getRawAxis(RobotMap.X_RIGHT_STICK_X));
   }
   public void Stop() {
     m_drive.arcadeDrive(0, 0);

@@ -10,11 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Arm extends SubsystemBase {
-  private PWMTalonSRX m_ArmMotor = new PWMTalonSRX(0);
+  private PWMTalonSRX m_ArmMotor = new PWMTalonSRX(1);
   private DigitalInput m_Down = new DigitalInput(0);
   private DigitalInput m_Up = new DigitalInput(1);
 
@@ -28,23 +28,25 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Up - Arm", this.isUp());
+    SmartDashboard.putBoolean("Down - Arm", this.isDown());
   }
   public void raise() {
-    m_ArmMotor.set(1);
+    m_ArmMotor.set(0.5);
   }
   
   public void lower (){
-    m_ArmMotor.set(1);
+    m_ArmMotor.set(-0.5);
   }
   public void stop() {
     m_ArmMotor.set(0);
   }
 
   public boolean isDown() {
-  return m_Down.get();
+  return !m_Down.get();
   }
 
   public boolean isUp (){
-    return m_Up.get();
+    return !m_Up.get();
   }
 }
