@@ -18,12 +18,13 @@ package frc.robot;
 public final class Constants {
     public static final class DriveConstants {
         public static final int kLeftMotor1Port = 7;
-        public static final int kLeftMotor2Port = 1;
+        public static final int kLeftMotor2Port = 6;
         public static final int kRightMotor1Port = 10;
-        public static final int kRightMotor2Port = 6;
+        public static final int kRightMotor2Port = 4;
 
         public static final double kRampRate = 1.0; // Seconds to go from 0 to full speed
-
+        public static final double kMaxHighSpeed = 1.0;
+        public static final double kMaxLowSpeed = 0.25;
         //Drive train
         public static final int maxAmps = 50;
         public static final int maxSecAmps = 80;

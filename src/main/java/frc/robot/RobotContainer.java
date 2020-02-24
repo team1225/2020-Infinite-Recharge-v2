@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
+import frc.robot.commands.RotationControl;
 import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
 import frc.robot.subsystems.Arm;
@@ -25,7 +26,7 @@ import frc.robot.commands.WenchDown;
 import frc.robot.commands.ArmLoading;
 import frc.robot.commands.ArmPickup;
 import frc.robot.commands.ColorControl;
-// import frc.robot.Constants.UpDown;
+import frc.robot.Constants.DriveConstants;
 // import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveForward;
@@ -75,9 +76,10 @@ public class RobotContainer {
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
     new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
+    new POVButton(m_joystick, 90).whenPressed(new RotationControl(m_colorwheel));
     new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
-        .whenPressed(() -> m_drivetrain.setMaxOutput(1.0))
-        .whenReleased(() -> m_drivetrain.setMaxOutput(0.5));
+        .whenPressed(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed))
+        .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed));
   }
 
 

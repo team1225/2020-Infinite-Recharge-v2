@@ -30,7 +30,7 @@ public class DriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(0.25, 0.0);
+    m_driveTrain.drive(0.5, 0.0);
   }
 
   // Called once the command ends or is interrupted.

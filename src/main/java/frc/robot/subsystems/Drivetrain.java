@@ -32,22 +32,22 @@ public class Drivetrain extends SubsystemBase {
    * Creates a new Drivetrain.
    */
   public Drivetrain() {
-
+    maxSpeed = 1.0;
     // Get motors
     m_leftMotor = new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
     m_rightMotor = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
-    m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
-    m_rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
+    // m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
+    // m_rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
 
     //Set Following
-    m_leftFollower.follow(m_leftMotor);
-    m_rightFollower.follow(m_rightMotor);
+    // m_leftFollower.follow(m_leftMotor);
+    // m_rightFollower.follow(m_rightMotor);
 
     // Set ramp rate from constant (Seconds it takes to go from 0 to full speed)
     m_leftMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
     m_rightMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
-    m_leftFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
-    m_rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // m_leftFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // m_rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
 
     // Get encoders
     m_leftEncoder = m_leftMotor.getEncoder();
@@ -55,9 +55,9 @@ public class Drivetrain extends SubsystemBase {
     m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
     m_leftMotor.setIdleMode(IdleMode.kBrake);
-    m_leftFollower.setIdleMode(IdleMode.kBrake);
     m_rightMotor.setIdleMode(IdleMode.kBrake);
-    m_rightFollower.setIdleMode(IdleMode.kBrake);
+    // m_leftFollower.setIdleMode(IdleMode.kBrake);
+    // m_rightFollower.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
