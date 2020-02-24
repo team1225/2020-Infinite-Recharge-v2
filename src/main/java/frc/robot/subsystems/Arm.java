@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants.ArmConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
@@ -14,15 +15,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Arm extends SubsystemBase {
-  private PWMTalonSRX m_ArmMotor = new PWMTalonSRX(1);
-  private DigitalInput m_Down = new DigitalInput(0);
-  private DigitalInput m_Up = new DigitalInput(1);
+  private PWMTalonSRX m_ArmMotor;
+  private DigitalInput m_Down;
+  private DigitalInput m_Up;
 
   /**
    * Creates a new Arm.
    */
   public Arm() {
-
+    m_ArmMotor = new PWMTalonSRX(ArmConstants.kMotorPort);
+    m_Down = new DigitalInput(ArmConstants.kLowerLimitSwitchPort);
+    m_Up = new DigitalInput(ArmConstants.kUpperLimitSwitchPort);
   }
 
   @Override
@@ -32,11 +35,11 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putBoolean("Down - Arm", this.isDown());
   }
   public void raise() {
-    m_ArmMotor.set(0.5);
+    m_ArmMotor.set(ArmConstants.kMaxSpeedUp);
   }
   
   public void lower (){
-    m_ArmMotor.set(-0.5);
+    m_ArmMotor.set(ArmConstants.kMaxSpeedDown);
   }
   public void stop() {
     m_ArmMotor.set(0);

@@ -7,17 +7,17 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants.HopperConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 
 public class Hopper extends SubsystemBase {
-  private PWMTalonSRX m_IntakeMotor = new PWMTalonSRX(0);
+  private PWMTalonSRX m_IntakeMotor;
   /**
    * Creates a new Hooper.
    */
   public Hopper() {
-
+    m_IntakeMotor = new PWMTalonSRX(HopperConstants.kMotorPort);
   }
 
   @Override
@@ -25,12 +25,11 @@ public class Hopper extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-
   public void in() {
-    m_IntakeMotor.set(-1);
+    m_IntakeMotor.set(-HopperConstants.kMaxSpeed);
   }
   public void out() {
-    m_IntakeMotor.set(1);
+    m_IntakeMotor.set(HopperConstants.kMaxSpeed);
   }
   public void inStop() {
     m_IntakeMotor.set(0);

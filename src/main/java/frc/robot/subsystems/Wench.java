@@ -7,21 +7,20 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.Constants.WenchConstants;
 
 public class Wench extends SubsystemBase {
   private CANSparkMax m_motorLeader;
-  private CANEncoder m_encoder;
   /**
    * Creates a new Wench.
    */
   public Wench() {
-    m_motorLeader = new CANSparkMax(RobotMap.WenchMotorCANId, MotorType.kBrushless);
-
+    m_motorLeader = new CANSparkMax(WenchConstants.kMotorPort, MotorType.kBrushless);
+    m_motorLeader.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
@@ -30,14 +29,14 @@ public class Wench extends SubsystemBase {
   }
 
   public void lower() {
-    m_motorLeader.set(-0.25);
+    m_motorLeader.set(WenchConstants.kMaxSpeedDown);
   }
 
-public void raise() {
-    m_motorLeader.set(0.25);
-}
+  public void raise() {
+      m_motorLeader.set(WenchConstants.kMaxSpeedUp);
+  }
 
-public void stop() {
-    m_motorLeader.set(0);
-}
+  public void stop() {
+      m_motorLeader.set(0);
+  }
 }
