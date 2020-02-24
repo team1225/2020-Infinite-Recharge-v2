@@ -78,6 +78,9 @@ public class RobotContainer {
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
     new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
+    new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
+        .whenPressed(() -> m_drivetrain.setMaxOutput(1.0))
+        .whenReleased(() -> m_drivetrain.setMaxOutput(0.5));
   }
 
 
