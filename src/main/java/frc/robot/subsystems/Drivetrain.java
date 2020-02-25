@@ -7,12 +7,12 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,40 +23,52 @@ public class Drivetrain extends SubsystemBase {
   private CANEncoder m_rightEncoder;
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
+  // private CANSparkMax m_leftFollower;
+  // private CANSparkMax m_rightFollower;
   private DifferentialDrive m_drive;
-  private int maxSpeedSetting;
   private Double maxSpeed; 
-
-  public final int rightMotorCANId = 10;
-  public final int leftMotorCANId = 7;  
-  public final double rampRate = 1.0;
 
   /**
    * Creates a new Drivetrain.
    */
   public Drivetrain() {
-    // Set the default "gear" and speed
-    maxSpeedSetting = Constants.Speeds.high_mid.gear();
-    maxSpeed = 0.2;// Constants.Speeds.high_mid.speed();
-
+    maxSpeed = 1.0;
     // Get motors
-    m_leftMotor = new CANSparkMax(leftMotorCANId, MotorType.kBrushless);
-    m_rightMotor = new CANSparkMax(rightMotorCANId, MotorType.kBrushless);
+    m_leftMotor = new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
+    m_rightMotor = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
+    // m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
+    // m_rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
 
-    // Set ramp rate from constant
-    m_leftMotor.setOpenLoopRampRate(rampRate);
-    m_rightMotor.setOpenLoopRampRate(rampRate);
-    
+    //Set Following
+    // m_leftFollower.follow(m_leftMotor);
+    // m_rightFollower.follow(m_rightMotor);
+
+    // Set ramp rate from constant (Seconds it takes to go from 0 to full speed)
+    m_leftMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
+    m_rightMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // m_leftFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // m_rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+
     // Get encoders
     m_leftEncoder = m_leftMotor.getEncoder();
     m_rightEncoder = m_rightMotor.getEncoder();
     m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+
+    m_leftMotor.setIdleMode(IdleMode.kBrake);
+    m_rightMotor.setIdleMode(IdleMode.kBrake);
+    // m_leftFollower.setIdleMode(IdleMode.kBrake);
+    // m_rightFollower.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Max Speed", maxSpeed);
+  }
+
+  public void setMaxOutput(double maxOutput) {
+    m_drive.setMaxOutput(maxOutput);
+    maxSpeed = maxOutput;
   }
 
   public void drive(Double speed, Double rotation) {
@@ -69,15 +81,4 @@ public class Drivetrain extends SubsystemBase {
   public void Stop() {
     m_drive.arcadeDrive(0, 0);
   }
-
-  // public void ChangeMaxSpeed(UpDown direction) {
-  //   if (direction == UpDown.Up && maxSpeedSetting < 4) {
-  //     maxSpeedSetting += 1;
-  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-  //   } 
-  //   if (direction == UpDown.Down && maxSpeedSetting > 0) {
-  //     maxSpeedSetting -= 1;
-  //     maxSpeed = Constants.Speeds.speed(maxSpeedSetting);
-  //   }
-  // }
 }

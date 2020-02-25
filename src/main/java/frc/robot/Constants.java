@@ -16,18 +16,39 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static enum UpDown {Up, Down};
-    public static enum Speeds {low (0), low_mid (1), mid (2), high_mid (3), high (4);
-        private final int gear;
-        public static final double maxSpeeds[] = {0.20, 0.35, 0.50, 0.65, 0.80};
-        Speeds(final int gear) {
-            this.gear = gear;
-        }
-        public int gear() { return this.gear; };
-        public double speed() { return maxSpeeds[this.gear]; }
-        public static double speed(final int gear) {
-            return maxSpeeds[gear];
-        }
+    public static final class DriveConstants {
+        public static final int kLeftMotor1Port = 7;
+        public static final int kLeftMotor2Port = 6;
+        public static final int kRightMotor1Port = 10;
+        public static final int kRightMotor2Port = 4;
+
+        public static final double kRampRate = 1.0; // Seconds to go from 0 to full speed
+        public static final double kMaxHighSpeed = 1.0;
+        public static final double kMaxLowSpeed = 0.25;
+        //Drive train
+        public static final int maxAmps = 50;
+        public static final int maxSecAmps = 80;
     };
 
+    public static final class WenchConstants {
+        public static final int kMotorPort = 11;
+        public static final double kMaxSpeedUp = 0.25;
+        public static final double kMaxSpeedDown = -0.25;
+        public static final int kLowerLimitSwitchPort = 3;
+        public static final int kUpperLimitSwitchPort = 4;
+    }
+
+    public static final class ArmConstants {
+        public static final int kMotorPort = 1;
+        public static final int kLowerLimitSwitchPort = 0;
+        public static final int kUpperLimitSwitchPort = 1;
+        public static final int kSafetyLimitSwitchPort = 2;
+        public static final double kMaxSpeedUp = 0.25;
+        public static final double kMaxSpeedDown = -0.25;
+    }
+
+    public static final class HopperConstants {
+        public static final int kMotorPort = 0;
+        public static final double kMaxSpeed = 1;
+    }
  }

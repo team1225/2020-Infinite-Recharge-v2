@@ -7,20 +7,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Constants.UpDown;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ChangeMaxSpeed extends InstantCommand {
-  public ChangeMaxSpeed( Drivetrain drivetrain, UpDown direction) {
-    // drivetrain.ChangeMaxSpeed(direction);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
+public class SimpleAuto extends ParallelCommandGroup {
+  /**
+   * Creates a new SimpleAuto.
+   */
+  public SimpleAuto(Drivetrain drivetrain, Arm arm) {
+    // Add your commands in the super() call, e.g.
+    super(new DriveForward(drivetrain), new ArmLoading(arm));
   }
 }
