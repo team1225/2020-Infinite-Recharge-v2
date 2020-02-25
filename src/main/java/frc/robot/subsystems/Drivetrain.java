@@ -23,8 +23,8 @@ public class Drivetrain extends SubsystemBase {
   private CANEncoder m_rightEncoder;
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
-  private CANSparkMax m_leftFollower;
-  private CANSparkMax m_rightFollower;
+  // private CANSparkMax m_leftFollower;
+  // private CANSparkMax m_rightFollower;
   private DifferentialDrive m_drive;
   private Double maxSpeed; 
 

@@ -40,7 +40,6 @@ public class ArmLoading extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_arm.isUp();
-  
+    return m_arm.isUp() || m_arm.safetyTriggered();
   }
 }

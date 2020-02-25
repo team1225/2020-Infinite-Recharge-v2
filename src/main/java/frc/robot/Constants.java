@@ -34,14 +34,17 @@ public final class Constants {
         public static final int kMotorPort = 11;
         public static final double kMaxSpeedUp = 0.25;
         public static final double kMaxSpeedDown = -0.25;
+        public static final int kLowerLimitSwitchPort = 3;
+        public static final int kUpperLimitSwitchPort = 4;
     }
 
     public static final class ArmConstants {
         public static final int kMotorPort = 1;
         public static final int kLowerLimitSwitchPort = 0;
         public static final int kUpperLimitSwitchPort = 1;
-        public static final double kMaxSpeedUp = 0.5;
-        public static final double kMaxSpeedDown = -0.5;
+        public static final int kSafetyLimitSwitchPort = 2;
+        public static final double kMaxSpeedUp = 0.25;
+        public static final double kMaxSpeedDown = -0.25;
     }
 
     public static final class HopperConstants {

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
+import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
 import frc.robot.subsystems.Arm;
@@ -49,7 +50,7 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   
   private final Joystick m_joystick = new Joystick(0);
-  private final DriveForward m_DriveForward = new DriveForward(m_drivetrain);
+  private final SimpleAuto m_Auto = new SimpleAuto(m_drivetrain, m_arm);
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -82,7 +83,6 @@ public class RobotContainer {
         .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed));
   }
 
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -90,6 +90,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_DriveForward.withTimeout(3);
+    return m_Auto.withTimeout(3);
   }
 }
