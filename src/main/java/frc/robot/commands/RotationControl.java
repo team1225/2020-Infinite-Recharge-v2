@@ -35,6 +35,7 @@ public class RotationControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_colorwheel.spin();
     String sensorColor = m_colorwheel.getColor();
     if (currentColor != sensorColor) {
         currentColor = sensorColor;

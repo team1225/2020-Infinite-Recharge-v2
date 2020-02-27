@@ -11,6 +11,8 @@ import frc.robot.Constants.ArmConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -33,6 +35,9 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // ShuffleboardTab tab = Shuffleboard.getTab("Data");
+    // tab.add("Up - Arm", this.isUp());
+    // tab.add("Down - Arm", this.isDown());
     SmartDashboard.putBoolean("Up - Arm", this.isUp());
     SmartDashboard.putBoolean("Down - Arm", this.isDown());
     SmartDashboard.putBoolean("Safety - Arm", this.safetyTriggered());

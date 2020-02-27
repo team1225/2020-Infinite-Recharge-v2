@@ -28,7 +28,9 @@ public class ArmLoading extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_arm.raise();
+    if (!m_arm.isUp()) {
+           m_arm.raise();
+        } else { m_arm.stop();}
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +42,6 @@ public class ArmLoading extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_arm.isUp() || m_arm.safetyTriggered();
+    return m_arm.safetyTriggered();
   }
 }

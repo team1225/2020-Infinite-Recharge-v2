@@ -72,7 +72,7 @@ public class RobotContainer {
 
     new JoystickButton(m_joystick, RobotMap.BUTTON_A).whileHeld(new WenchUp(m_wench));
     new JoystickButton(m_joystick, RobotMap.BUTTON_B).whileHeld(new WenchDown(m_wench));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whenPressed(new ArmLoading(m_arm));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whileHeld(new ArmLoading(m_arm));
     new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(m_arm));
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
