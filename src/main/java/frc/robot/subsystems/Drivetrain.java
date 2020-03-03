@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANEncoder;
+// import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Drivetrain extends SubsystemBase {
-  private CANEncoder m_leftEncoder;
-  private CANEncoder m_rightEncoder;
+  // private CANEncoder m_leftEncoder;
+  // private CANEncoder m_rightEncoder;
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
   // private CANSparkMax m_leftFollower;
@@ -50,8 +50,8 @@ public class Drivetrain extends SubsystemBase {
     // m_rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
 
     // Get encoders
-    m_leftEncoder = m_leftMotor.getEncoder();
-    m_rightEncoder = m_rightMotor.getEncoder();
+    // m_leftEncoder = m_leftMotor.getEncoder();
+    // m_rightEncoder = m_rightMotor.getEncoder();
     m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
     m_leftMotor.setIdleMode(IdleMode.kBrake);

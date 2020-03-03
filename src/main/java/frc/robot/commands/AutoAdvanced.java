@@ -7,19 +7,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Hopper;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class SimpleAuto extends ParallelCommandGroup {
+public class AutoAdvanced extends SequentialCommandGroup {
   /**
-   * Creates a new SimpleAuto.
+   * Creates a new AdvAuto.
    */
-  public SimpleAuto(Drivetrain drivetrain, Arm arm) {
-    // Add your commands in the super() call, e.g.
-    super(new DriveForward(drivetrain), new ArmLoading(arm));
+  public AutoAdvanced(Drivetrain drive, Arm arm, Hopper hopper) {
+    super(new AutoSimple(drive, arm), new ArmLoading(arm), new HopperOut(hopper).withTimeout(3));
   }
 }

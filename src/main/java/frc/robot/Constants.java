@@ -44,7 +44,7 @@ public final class Constants {
         public static final int kUpperLimitSwitchPort = 1;
         public static final int kSafetyLimitSwitchPort = 2;
         public static final double kMaxSpeedUp = 0.40;
-        public static final double kMaxSpeedDown = -0.25;
+        public static final double kMaxSpeedDown = -0.60;
     }
 
     public static final class HopperConstants {
