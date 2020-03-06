@@ -81,12 +81,12 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(new Drive(() -> -m_joystick.getY(),
-        () -> m_joystick.getRawAxis(RobotMap.D_RIGHT_STICK_X), m_drivetrain));
+        () -> m_joystick.getZ(), m_drivetrain));
     // Configure the button bindings
     configureButtonBindings();
 
-    sc.addDefault("Advanced", CommandSelector.Advanced);
-    sc.addObject("Simple", CommandSelector.Simple);
+    sc.setDefaultOption("Advanced", CommandSelector.Advanced);
+    sc.addOption("Simple", CommandSelector.Simple);
     SmartDashboard.putData("Which Auto?", sc);
   }
 

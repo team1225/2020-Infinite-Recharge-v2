@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Wench;
 
@@ -25,8 +26,11 @@ public class WenchUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_wench.raise();
-    super.initialize();
+    if (DriverStation.getInstance().getMatchTime() <= 30.0) {
+      m_wench.raise();
+    } else {
+      this.end(false);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

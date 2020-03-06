@@ -39,7 +39,7 @@ public class ArmInitialize extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_arm.isDown();
+    return m_arm.isUp() || m_arm.safetyTriggered();
     
   }
 }

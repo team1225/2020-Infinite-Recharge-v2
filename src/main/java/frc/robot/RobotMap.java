@@ -8,9 +8,9 @@ public final class RobotMap {
 	public static final int OPERATOR_CONTROLLER = 1;
 
 	public static final int BUTTON_X = 1;
-	public static final int BUTTON_A = 2;
-	public static final int BUTTON_B = 3;
-	public static final int BUTTON_Y = 4;
+	public static final int BUTTON_A = 3;
+	public static final int BUTTON_B = 4;
+	public static final int BUTTON_Y = 2;
 	public static final int LEFT_BUMPER = 5;
 	public static final int RIGHT_BUMPER = 6;
 	public static final int LEFT_TRIGGER = 7;
