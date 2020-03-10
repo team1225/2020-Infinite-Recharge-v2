@@ -40,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
     m_rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
 
     //Set Following
-    // m_leftFollower.follow(m_leftMotor);
+    m_leftFollower.follow(m_leftMotor);
     m_rightFollower.follow(m_rightMotor);
 
     // Set ramp rate from constant (Seconds it takes to go from 0 to full speed)

@@ -20,6 +20,6 @@ public class AutoSimple extends ParallelCommandGroup {
    */
   public AutoSimple(Drivetrain drivetrain, Arm arm) {
     // Add your commands in the super() call, e.g.
-    super(new DriveForward(drivetrain).withTimeout(3)); //, new ArmInitialize(arm)
+    super(new DriveForward(drivetrain).withTimeout(4), new ArmInitialize(arm)); 
   }
 }
