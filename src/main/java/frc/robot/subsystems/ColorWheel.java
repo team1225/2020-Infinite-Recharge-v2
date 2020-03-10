@@ -69,6 +69,10 @@ public class ColorWheel extends SubsystemBase {
     m_spinner.set(1.0);
   }
 
+  public void spinSlow() {
+    m_spinner.set(0.30);
+  }
+
   public void stop() {
     m_spinner.set(0);
   }

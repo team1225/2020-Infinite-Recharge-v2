@@ -34,12 +34,13 @@ public class ArmInitialize extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_arm.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_arm.isDown();
+    return m_arm.isUp() || m_arm.safetyTriggered();
     
   }
 }
