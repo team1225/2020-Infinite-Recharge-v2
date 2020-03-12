@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANEncoder;
@@ -43,7 +44,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANEncoder m_rightEncoder = new CANEncoder(m_rightMotorMaster);
 
   // The gyro sensor
-  private final Gyro m_gyro = new ADXRS450_Gyro();
+  private final Gyro m_gyro = new ADIS16448_IMU();
 
   // Odometry class for tracking robot pose
   private final DifferentialDriveOdometry m_odometry;
