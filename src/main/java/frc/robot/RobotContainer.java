@@ -30,25 +30,19 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
-import frc.robot.commands.AutoSimple;
-import frc.robot.commands.AutoSweep;
 import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.WenchUp;
 import frc.robot.commands.WenchDown;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.ArmLoading;
 import frc.robot.commands.ArmPickup;
-import frc.robot.commands.AutoAdvanced;
-import frc.robot.commands.AutoAdvancedFast;
 import frc.robot.commands.ColorControl;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -66,7 +60,6 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Wench m_wench = new Wench();
-  private final Drivetrain m_drivetrain = new Drivetrain();
   private final ColorWheel m_colorwheel = new ColorWheel();
   private final Hopper m_hopper = new Hopper();
   private final Arm m_arm = new Arm();
@@ -89,10 +82,10 @@ public class RobotContainer {
       new SelectCommand(
           // Maps selector values to commands
           Map.ofEntries(
-              entry(CommandSelector.Simple, new AutoSimple(m_drivetrain, m_arm)),
-              entry(CommandSelector.Advanced, new AutoAdvanced(m_drivetrain, m_arm, m_hopper)),
-              entry(CommandSelector.AdvancedFast, new AutoAdvancedFast(m_drivetrain, m_arm, m_hopper)),
-              entry(CommandSelector.Sweep, new AutoSweep(m_drivetrain, m_arm, m_hopper))
+              // entry(CommandSelector.Simple, new AutoSimple(m_drivetrain, m_arm)),
+              // entry(CommandSelector.Advanced, new AutoAdvanced(m_drivetrain, m_arm, m_hopper)),
+              // entry(CommandSelector.AdvancedFast, new AutoAdvancedFast(m_drivetrain, m_arm, m_hopper)),
+              // entry(CommandSelector.Sweep, new AutoSweep(m_drivetrain, m_arm, m_hopper))
           ),
           this::select
       );
@@ -100,16 +93,14 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drivetrain.setDefaultCommand(new Drive(() -> -m_joystick.getY(),
-        () -> m_joystick.getZ(), m_drivetrain));
     // Configure the button bindings
     configureButtonBindings();
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
         new RunCommand(() -> m_robotDrive
-            .arcadeDrive(m_joystick.getY(GenericHID.Hand.kLeft),
-            m_joystick.getX(GenericHID.Hand.kRight)), m_robotDrive));
+            .arcadeDrive(m_joystick.getY(),
+            m_joystick.getZ()), m_robotDrive));
 
     // m_drivetrain.setDefaultCommand(new Drive(() -> m_joystick.getY(Hand.kLeft),
     //     () -> m_joystick.getX(Hand.kRight), m_drivetrain));
@@ -138,9 +129,9 @@ public class RobotContainer {
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
     new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
     new POVButton(m_joystick, 90).whenPressed(new RotationControl(m_colorwheel));
-    new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
-        .whenPressed(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
-        .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));
+    // new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
+    //     .whenPressed(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
+    //     .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));
   }
 
   /**

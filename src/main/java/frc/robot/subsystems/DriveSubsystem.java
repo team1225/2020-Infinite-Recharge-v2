@@ -12,6 +12,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -25,23 +26,23 @@ import frc.robot.Constants.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
   // The motors on the left side of the drive.
-  private final CANSparkMax m_leftMotorMaster = new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
-  private final CANSparkMax m_leftMotorSlave  = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
-  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(m_leftMotorMaster, m_leftMotorSlave);
+  private final CANSparkMax m_leftMotor = new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
+  private final CANSparkMax m_leftFollower  = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
+  private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(m_leftMotor, m_leftFollower);
 
   // The motors on the right side of the drive.
-  private final CANSparkMax m_rightMotorMaster = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
-  private final CANSparkMax m_rightMotorSlave  = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
-  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(m_rightMotorMaster, m_rightMotorSlave);
-
+  private final CANSparkMax m_rightMotor = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
+  private final CANSparkMax m_rightFollower  = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
+  private final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(m_rightMotor, m_rightFollower);
+  
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   // The left-side drive encoder
-  private final CANEncoder m_leftEncoder = new CANEncoder(m_leftMotorMaster);
+  private final CANEncoder m_leftEncoder = new CANEncoder(m_leftMotor);
 
   // The right-side drive encoder
-  private final CANEncoder m_rightEncoder = new CANEncoder(m_rightMotorMaster);
+  private final CANEncoder m_rightEncoder = new CANEncoder(m_rightMotor);
 
   // The gyro sensor
   private final Gyro m_gyro = new ADIS16448_IMU();
@@ -53,6 +54,11 @@ public class DriveSubsystem extends SubsystemBase {
    * Creates a new DriveSubsystem.
    */
   public DriveSubsystem() {
+    // Configure Motor Controller internal settings
+    m_leftMotor.setIdleMode(IdleMode.kBrake);
+    m_rightMotor.setIdleMode(IdleMode.kBrake);
+    m_leftFollower.setIdleMode(IdleMode.kBrake);
+    m_rightFollower.setIdleMode(IdleMode.kBrake);
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
     m_leftEncoder.setVelocityConversionFactor(DriveConstants.kEncoderDistancePerPulse);
