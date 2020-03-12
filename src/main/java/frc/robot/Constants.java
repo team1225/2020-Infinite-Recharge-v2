@@ -19,9 +19,9 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 public final class Constants {
     public static final class DriveConstants {
         public static final int kLeftMotor1Port = 7;
-        public static final int kLeftMotor2Port = 1;
-        public static final int kRightMotor1Port = 4;
-        public static final int kRightMotor2Port = 10;
+        public static final int kLeftMotor2Port = 6;
+        public static final int kRightMotor1Port = 10;
+        public static final int kRightMotor2Port = 4;
     
         public static final int[] kLeftEncoderPorts = new int[]{0, 1};
         public static final int[] kRightEncoderPorts = new int[]{2, 3};
@@ -40,6 +40,11 @@ public final class Constants {
     
         public static final boolean kGyroReversed = true;
     
+        public static final double kRampRate = 1.0; // Seconds to go from 0 to full speed
+        public static final double kMaxHighSpeed = 1.0;
+        public static final double kMaxLowSpeed = 0.25;
+        public static final int maxAmps = 50;
+        public static final int maxSecAmps = 80;
         // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
         // These characterization values MUST be determined either experimentally or theoretically
         // for *your* robot's drive.
@@ -65,4 +70,26 @@ public final class Constants {
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
       }
+
+       public static final class WenchConstants {
+        public static final int kMotorPort = 11;
+        public static final double kMaxSpeedUp = 0.25;
+        public static final double kMaxSpeedDown = -0.25;
+        public static final int kLowerLimitSwitchPort = 3;
+        public static final int kUpperLimitSwitchPort = 4;
+    }
+
+    public static final class ArmConstants {
+        public static final int kMotorPort = 1;
+        public static final int kLowerLimitSwitchPort = 0;
+        public static final int kUpperLimitSwitchPort = 1;
+        public static final int kSafetyLimitSwitchPort = 2;
+        public static final double kMaxSpeedUp = 0.40;
+        public static final double kMaxSpeedDown = -0.25;
+    }
+
+    public static final class HopperConstants {
+        public static final int kMotorPort = 0;
+        public static final double kMaxSpeed = 1;
+    }
    }

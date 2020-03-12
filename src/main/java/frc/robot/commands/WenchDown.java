@@ -32,7 +32,7 @@ public class WenchDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_wench.raise();
+    m_wench.lower();
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +44,6 @@ public class WenchDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_wench.isDown();
   }
 }

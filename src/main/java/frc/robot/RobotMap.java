@@ -3,21 +3,6 @@
 package frc.robot;
 
 public final class RobotMap {
-/**************************************************
- *                   CAN Ids
- **************************************************/
-
-    public static final int IntakeCANId = 11;
-    public static final int WenchMotorCANId = 11;
-    
- /************************************************
-  *                    Settings
-  ***********************************************/   
-
-    //Drive train
-    public static final int maxAmps = 50;
-    public static final int maxSecAmps = 80;
-
     // Joystick buttons
     public static final int DRIVER_CONTROLLER = 0;
 	public static final int OPERATOR_CONTROLLER = 1;

@@ -22,10 +22,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.controller.PIDController;
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hopper;
 import frc.robot.commands.HopperOut;
+import frc.robot.commands.RotationControl;
+import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.HopperIn;
 import frc.robot.subsystems.Wench;
 import frc.robot.subsystems.Arm;
@@ -38,16 +38,16 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.ArmLoading;
 import frc.robot.commands.ArmPickup;
-// import frc.robot.Constants.UpDown;
+import frc.robot.commands.ColorControl;
+import frc.robot.Constants.DriveConstants;
 // import frc.robot.commands.ChangeMaxSpeed;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveForward;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-
-import static edu.wpi.first.wpilibj.XboxController.Button;
 
 import java.util.List;
 /**
@@ -58,7 +58,6 @@ import java.util.List;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Wench m_wench = new Wench();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final ColorWheel m_colorwheel = new ColorWheel();
@@ -68,13 +67,15 @@ public class RobotContainer {
 
   
   private final Joystick m_joystick = new Joystick(0);
+  private final SimpleAuto m_Auto = new SimpleAuto(m_drivetrain, m_arm);
   
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    m_drivetrain.setDefaultCommand(new Drive(() -> -m_joystick.getY(Hand.kLeft),
+        () -> m_joystick.getX(Hand.kRight), m_drivetrain));
+    // Configure the button bindings
     configureButtonBindings();
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
@@ -98,15 +99,16 @@ public class RobotContainer {
 
     new JoystickButton(m_joystick, RobotMap.BUTTON_A).whileHeld(new WenchUp(m_wench));
     new JoystickButton(m_joystick, RobotMap.BUTTON_B).whileHeld(new WenchDown(m_wench));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whenHeld(new ArmLoading(m_arm));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenHeld(new ArmPickup(m_arm));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whileHeld(new ArmLoading(m_arm));
+    new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(m_arm));
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
+    new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
+    new POVButton(m_joystick, 90).whenPressed(new RotationControl(m_colorwheel));
     new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(1.0))
-        .whenReleased(() -> m_robotDrive.setMaxOutput(0.5));
+        .whenPressed(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed))
+        .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed));
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
