@@ -94,7 +94,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    configureButtonBindings();
+    // configureButtonBindings();
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
@@ -114,17 +114,9 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-
-    new JoystickButton(m_joystick2, RobotMap.BUTTON_A).whileHeld(new WenchDown(m_wench)); //B
-    new JoystickButton(m_joystick2, RobotMap.BUTTON_B).whileHeld(new WenchUp(m_wench)); //Y
-    new JoystickButton(m_joystick2, RobotMap.BUTTON_X).whileHeld(new ArmLoading(m_arm)); //X
-    new JoystickButton(m_joystick2, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(m_arm)); // A
+   * Use this method to define your bu
+   * '
+   
     new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
     new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
     new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
