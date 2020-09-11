@@ -12,18 +12,19 @@ import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
 
 public class Drive extends CommandBase {
-  private final Drivetrain m_drivetrain;
-  private final DoubleSupplier m_left;
-  private final DoubleSupplier m_right;
+  private final Drivetrain drivetrain;
+  private final DoubleSupplier leftSupplier;
+  private final DoubleSupplier rightSupplier;
+
   /**
    * Creates a new Drive.
    */
   public Drive(DoubleSupplier left, DoubleSupplier right, Drivetrain drivetrain) {
+    this.drivetrain = drivetrain;
+    leftSupplier = left;
+    rightSupplier = right;
     // Use addRequirements() here to declare subsystem dependencies.
-    m_drivetrain = drivetrain;
-    m_left = left;
-    m_right = right;
-    addRequirements(m_drivetrain);
+    addRequirements(this.drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -34,13 +35,13 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_left.getAsDouble(), m_right.getAsDouble());
+    drivetrain.drive(leftSupplier.getAsDouble(), rightSupplier.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0.0, 0.0);
+    drivetrain.drive(0.0, 0.0);
   }
 
   // Returns true when the command should end.

@@ -12,22 +12,23 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Wench;
 
 public class WenchUp extends CommandBase {
-  private final Wench m_wench;
+  private final Wench wench;
+
   /**
    * Creates a new WenchUp.
    */
   public WenchUp(Wench wench) {
     super();
+    this.wench = wench;
     // Use addRequirements() here to declare subsystem dependencies.
-    m_wench = wench;
-    addRequirements(m_wench);
+    addRequirements(this.wench);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     if (DriverStation.getInstance().getMatchTime() <= 30.0) {
-      m_wench.raise();
+      wench.raise();
     } else {
       this.end(false);
     }
@@ -41,12 +42,12 @@ public class WenchUp extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_wench.stop();
+    wench.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_wench.isUp();
+    return wench.isUp();
   }
 }

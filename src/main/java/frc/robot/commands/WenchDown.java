@@ -11,39 +11,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Wench;
 
 public class WenchDown extends CommandBase {
-  private final Wench m_wench;
+  private final Wench wench;
+  
   /**
    * Creates a new WenchUp.
    */
   public WenchDown(Wench wench) {
     super();
+    this.wench = wench;
     // Use addRequirements() here to declare subsystem dependencies.
-    m_wench = wench;
-    addRequirements(m_wench);
+    addRequirements(this.wench);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_wench.lower();
+    wench.lower();
     super.initialize();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_wench.lower();
+    wench.lower();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_wench.stop();
+    wench.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_wench.isDown();
+    return wench.isDown();
   }
 }
