@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
 // import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.team1225.helpers.MockButton;
 import com.team1225.helpers.MockHardwareExtension;

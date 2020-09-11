@@ -28,7 +28,7 @@ public class ColorWheel extends SubsystemBase {
   private final Color redTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color yellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  private PWMTalonSRX spinner = new PWMTalonSRX(2);
+  private final PWMTalonSRX spinner = new PWMTalonSRX(2);
 
   /**
    * Creates a new ColorWheel.
@@ -37,16 +37,16 @@ public class ColorWheel extends SubsystemBase {
     colorMatcher.addColorMatch(blueTarget);
     colorMatcher.addColorMatch(greenTarget);
     colorMatcher.addColorMatch(redTarget);
-    colorMatcher.addColorMatch(yellowTarget);   
+    colorMatcher.addColorMatch(yellowTarget);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Color detectedColor = colorSensor.getColor();
+    final Color detectedColor = colorSensor.getColor();
 
     String colorString;
-    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
     if (match.color == blueTarget) {
       colorString = "Blue";
     } else if (match.color == redTarget) {
@@ -82,15 +82,16 @@ public class ColorWheel extends SubsystemBase {
   }
 
   /**
-   * Determines the closest color to the defined colors.
-   * Converts color to a String representing the name of the color 
+   * Determines the closest color to the defined colors. Converts color to a
+   * String representing the name of the color
+   * 
    * @return String color
    */
   public String getColor() {
-    Color detectedColor = colorSensor.getColor();
+    final Color detectedColor = colorSensor.getColor();
 
     String colorString;
-    ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+    final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
     if (match.color == blueTarget) {
       colorString = "Blue";
@@ -113,10 +114,8 @@ public class ColorWheel extends SubsystemBase {
   public String getAssignedColor() {
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    if (gameData.length() > 0)
-    {
-      switch (gameData.charAt(0))
-      {
+    if (gameData.length() > 0) {
+      switch (gameData.charAt(0)) {
         case 'B' :
           return "Red";
         case 'G' :
