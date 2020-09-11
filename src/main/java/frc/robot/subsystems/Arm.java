@@ -48,7 +48,7 @@ public class Arm extends SubsystemBase {
     armMotor.set(ArmConstants.kMaxSpeedUp);
   }
   
-  public void lower (){
+  public void lower() {
     armMotor.set(ArmConstants.kMaxSpeedDown);
   }
 
