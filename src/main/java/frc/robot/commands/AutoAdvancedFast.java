@@ -20,7 +20,7 @@ public class AutoAdvancedFast extends SequentialCommandGroup {
    * Creates a new AdvAuto.
    */
   public AutoAdvancedFast(Drivetrain drive, Arm arm, Hopper hopper) {
-    super(new AutoFastSimple(drive, arm), new ArmLoading(arm).withTimeout(3), new HopperIn(hopper).withTimeout(4));
-    
+    super(new AutoFastSimple(drive, arm), new ArmLoading(arm).withTimeout(3), 
+        new HopperIn(hopper).withTimeout(4));
   }
 }

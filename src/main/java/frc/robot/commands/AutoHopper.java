@@ -11,21 +11,21 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
 public class AutoHopper extends CommandBase {
+  private Hopper hopper;
+
   /**
    * Creates a new AutoHopper.
    */
-  private Hopper m_hopper;
-
   public AutoHopper(Hopper hopper) {
+    this.hopper = hopper;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(hopper);
-    m_hopper = hopper;
+    addRequirements(this.hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_hopper.out();
+    hopper.out();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,7 +36,7 @@ public class AutoHopper extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_hopper.inStop();
+    hopper.inStop();
   }
 
   // Returns true when the command should end.

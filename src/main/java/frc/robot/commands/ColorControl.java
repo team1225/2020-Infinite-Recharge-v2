@@ -9,26 +9,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheel;
+
 public class ColorControl extends CommandBase {
- private ColorWheel  m_colorwheel;
- private String assignedColor;
+  private ColorWheel colorWheel;
+  private String assignedColor;
+
   /**
    * Creates a new ColorControl.
    */
   public ColorControl(ColorWheel colorWheel) {
-    addRequirements(colorWheel);
+    this.colorWheel = colorWheel;
     // Use addRequirements() here to declare subsystem dependencies.
-    m_colorwheel=colorWheel;
-
+    addRequirements(this.colorWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    assignedColor = m_colorwheel.getAssignedColor();
-    m_colorwheel.spinSlow();
-  
-    
+    assignedColor = colorWheel.getAssignedColor();
+    colorWheel.spinSlow();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,12 +38,12 @@ public class ColorControl extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_colorwheel.stop();
+    colorWheel.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_colorwheel.getColor() == assignedColor;
+    return colorWheel.getColor() == assignedColor;
   }
 }

@@ -17,10 +17,11 @@ import frc.robot.subsystems.Hopper;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class AutoSweep extends ParallelCommandGroup {
   /**
-   * Creates a new AutoSimple.
+   * Creates a new AutoSweep.
    */
   public AutoSweep(Drivetrain drivetrain, Arm arm, Hopper hopper) {
     // Add your commands in the super() call, e.g.
-    super(new DriveForward(drivetrain).withTimeout(3), new ArmPickup(arm), new AutoHopperIn(hopper)); 
+    super(new DriveForward(drivetrain).withTimeout(3), new ArmPickup(arm),
+        new AutoHopperIn(hopper)); 
   }
 }

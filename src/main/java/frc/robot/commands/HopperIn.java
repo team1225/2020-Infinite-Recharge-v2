@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
 public class HopperIn extends CommandBase {
+  private Hopper hopper;
+
   /**
    * Creates a new HopperIn.
    */
-  private Hopper m_hopper;
-
   public HopperIn(Hopper hopper) {
+    this.hopper = hopper;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(hopper);
-    m_hopper = hopper;
+    addRequirements(this.hopper);
   }
 
   // Called when the command is initially scheduled.
@@ -31,13 +31,13 @@ public class HopperIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_hopper.in();
+    hopper.in();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_hopper.inStop();
+    hopper.inStop();
   }
 
   // Returns true when the command should end.
