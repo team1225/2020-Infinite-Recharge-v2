@@ -1,6 +1,6 @@
 package com.team1225.helpers;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * Extend this class when your test requires commands or command groups to be
@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;;
  */
 public class TestWithScheduler {
 
-	public static void schedulerStart() {
-		CommandScheduler.getInstance().enable();
-	}
+  public static void schedulerStart() {
+    CommandScheduler.getInstance().enable();
+  }
 
-	public static void schedulerClear() {
-		CommandScheduler.getInstance().cancelAll();
-		CommandScheduler.getInstance().clearButtons();
-	}
+  public static void schedulerClear() {
+    CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().clearButtons();
+  }
 
-	public static void schedulerDestroy() {
-		CommandScheduler.getInstance().disable();
-	}
+  public static void schedulerDestroy() {
+    CommandScheduler.getInstance().disable();
+  }
 }

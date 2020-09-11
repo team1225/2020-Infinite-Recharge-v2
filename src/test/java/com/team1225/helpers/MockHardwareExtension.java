@@ -10,21 +10,21 @@ import edu.wpi.first.wpilibj.DriverStation;
  */
 public final class MockHardwareExtension {
 
-	public static void beforeAll() {
-		initializeHardware();
-	}
+  public static void beforeAll() {
+    initializeHardware();
+  }
 
-	public static void afterAll() {
-		DriverStation.getInstance().release();
-		HAL.releaseDSMutex();
-	}
+  public static void afterAll() {
+    DriverStation.getInstance().release();
+    HAL.releaseDSMutex();
+  }
 
-	private static void initializeHardware() {
-		HAL.initialize(500, 0);
-		DriverStationSim dsSim = new DriverStationSim();
-		dsSim.setDsAttached(true);
-		dsSim.setAutonomous(false);
-		dsSim.setEnabled(true);
-		dsSim.setTest(true);
-	}
+  private static void initializeHardware() {
+    HAL.initialize(500, 0);
+    DriverStationSim dsSim = new DriverStationSim();
+    dsSim.setDsAttached(true);
+    dsSim.setAutonomous(false);
+    dsSim.setEnabled(true);
+    dsSim.setTest(true);
+  }
 }
