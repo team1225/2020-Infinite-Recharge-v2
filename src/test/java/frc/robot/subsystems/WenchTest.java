@@ -41,10 +41,10 @@ public class WenchTest {
 		reset(mockedWench);
 
 		// Create command
-		WenchDown wenchDown = new WenchDown(mockedWench);
+		final WenchDown wenchDown = new WenchDown(mockedWench);
 
 		// Create a fake button that will be "pressed"
-		MockButton fakeButton = new MockButton();
+		final MockButton fakeButton = new MockButton();
 
 		// Tell the button to run example command when pressed
 		fakeButton.whenPressed(wenchDown);
