@@ -8,44 +8,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Drivetrain;
 
-public class ArmLoading extends CommandBase {
-  private Arm arm;
-
+public class DriveForwardFast extends CommandBase {
+  private Drivetrain driveTrain;
+  
   /**
-   * Creates a new ArmLoading.
+   * Creates a new DriveForward.
    */
-  public ArmLoading(Arm arm) {
-    this.arm = arm;
+  public DriveForwardFast(Drivetrain driveTrain) {
+    this.driveTrain = driveTrain;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.arm);
+    addRequirements(this.driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!arm.isUp()) {
-      arm.raise();
-    } else { 
-      arm.stop();
-    }
+    driveTrain.drive(0.75, 0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    arm.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return arm.safetyTriggered();
+    return false;
   }
 }

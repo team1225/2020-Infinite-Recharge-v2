@@ -7,33 +7,42 @@
 
 package frc.robot;
 
+import static java.util.Map.entry;
+
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SelectCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-import frc.robot.subsystems.Hopper;
+import frc.robot.Constants.DriveConstants;
+
+import frc.robot.commands.ArmLoading;
+import frc.robot.commands.ArmPickup;
+import frc.robot.commands.AutoAdvanced;
+import frc.robot.commands.AutoAdvancedFast;
+import frc.robot.commands.AutoSimple;
+import frc.robot.commands.AutoSweep;
+import frc.robot.commands.ColorControl;
+import frc.robot.commands.Drive;
+import frc.robot.commands.HopperIn;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
-import frc.robot.commands.SimpleAuto;
-import frc.robot.commands.HopperIn;
-import frc.robot.subsystems.Wench;
+import frc.robot.commands.WenchDown;
+import frc.robot.commands.WenchUp;
+
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.commands.WenchUp;
-import frc.robot.commands.WenchDown;
-import frc.robot.commands.ArmLoading;
-import frc.robot.commands.ArmPickup;
-import frc.robot.commands.ColorControl;
-import frc.robot.Constants.DriveConstants;
-// import frc.robot.commands.ChangeMaxSpeed;
-import frc.robot.commands.Drive;
-import frc.robot.commands.DriveForward;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Wench;
+
+import java.util.Map;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -43,23 +52,50 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Wench m_wench = new Wench();
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final ColorWheel m_colorwheel = new ColorWheel();
-  private final Hopper m_hopper = new Hopper();
-  private final Arm m_arm = new Arm();
+  private final Wench wench = new Wench();
+  private final Drivetrain drivetrain = new Drivetrain();
+  private final ColorWheel colorwheel = new ColorWheel();
+  private final Hopper hopper = new Hopper();
+  private final Arm arm = new Arm();
   
-  private final Joystick m_joystick = new Joystick(0);
-  private final SimpleAuto m_Auto = new SimpleAuto(m_drivetrain, m_arm);
+  private final Joystick joystick = new Joystick(0);
+  private final Joystick joystick2 = new Joystick(1);
+  private SendableChooser<CommandSelector> sc = new SendableChooser<CommandSelector>();
   
+  private enum CommandSelector {
+    Simple, Advanced, AdvancedFast, Sweep
+  }
+
+  private CommandSelector select() {
+    return sc.getSelected();
+  }
+
+  private final Command exampleSelectCommand =
+      new SelectCommand(
+          // Maps selector values to commands
+          Map.ofEntries(
+              entry(CommandSelector.Simple, new AutoSimple(drivetrain, arm)),
+              entry(CommandSelector.Advanced, new AutoAdvanced(drivetrain, arm, hopper)),
+              entry(CommandSelector.AdvancedFast, new AutoAdvancedFast(drivetrain, arm, hopper)),
+              entry(CommandSelector.Sweep, new AutoSweep(drivetrain, arm, hopper))
+          ),
+          this::select
+      );
+      
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drivetrain.setDefaultCommand(new Drive(() -> -m_joystick.getY(Hand.kLeft),
-        () -> m_joystick.getX(Hand.kRight), m_drivetrain));
+    drivetrain.setDefaultCommand(new Drive(() -> -joystick.getY(),
+        () -> joystick.getZ(), drivetrain));
     // Configure the button bindings
     configureButtonBindings();
+
+    sc.setDefaultOption("Advanced", CommandSelector.Advanced);
+    sc.addOption("Simple", CommandSelector.Simple);
+    sc.addOption("Fast Advanced", CommandSelector.AdvancedFast);
+    
+    SmartDashboard.putData("Which Auto?", sc);
   }
 
   /**
@@ -70,17 +106,17 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(m_joystick, RobotMap.BUTTON_A).whileHeld(new WenchUp(m_wench));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_B).whileHeld(new WenchDown(m_wench));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_X).whenPressed(new ArmLoading(m_arm));
-    new JoystickButton(m_joystick, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(m_arm));
-    new JoystickButton(m_joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(m_hopper));
-    new JoystickButton(m_joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(m_hopper));
-    new POVButton(m_joystick, 270).whenPressed(new ColorControl(m_colorwheel));
-    new POVButton(m_joystick, 90).whenPressed(new RotationControl(m_colorwheel));
-    new JoystickButton(m_joystick, RobotMap.LEFT_STICK_BUTTON)
-        .whenPressed(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed))
-        .whenReleased(() -> m_drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed));
+    new JoystickButton(joystick2, RobotMap.BUTTON_A).whileHeld(new WenchDown(wench)); //B
+    new JoystickButton(joystick2, RobotMap.BUTTON_B).whileHeld(new WenchUp(wench)); //Y
+    new JoystickButton(joystick2, RobotMap.BUTTON_X).whileHeld(new ArmLoading(arm)); //X
+    new JoystickButton(joystick2, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(arm)); // A
+    new JoystickButton(joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(hopper));
+    new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
+    new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
+    new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
+    new JoystickButton(joystick, RobotMap.LEFT_STICK_BUTTON)
+        .whenPressed(() -> drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
+        .whenReleased(() -> drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));
   }
 
   /**
@@ -90,6 +126,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_Auto.withTimeout(3);
+    return exampleSelectCommand;
   }
 }
