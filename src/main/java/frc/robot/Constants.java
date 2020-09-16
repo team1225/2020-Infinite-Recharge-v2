@@ -52,4 +52,10 @@ public final class Constants {
     public static final int kMotorPort = 0;
     public static final double kMaxSpeed = 1;
   }
+
+  public static final class VisionConstants {
+    public static final double targetHeight = 8.0;
+    public static final double cameraHeight = 2.0;
+    public static final double cameraAngle = 15.0;
+  }
 }

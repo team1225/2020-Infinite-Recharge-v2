@@ -29,6 +29,7 @@ import frc.robot.commands.AutoSimple;
 import frc.robot.commands.AutoSweep;
 import frc.robot.commands.ColorControl;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveTarget;
 import frc.robot.commands.HopperIn;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
@@ -39,6 +40,7 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.LimeLight2;
 import frc.robot.subsystems.Wench;
 
 import java.util.Map;
@@ -114,6 +116,7 @@ public class RobotContainer {
     new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
     new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
     new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
+    new POVButton(joystick, 180).whenPressed(new DriveTarget(new Drivetrain(), new LimeLight2()));
     new JoystickButton(joystick, RobotMap.LEFT_STICK_BUTTON)
         .whenPressed(() -> drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
         .whenReleased(() -> drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));
