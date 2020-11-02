@@ -10,20 +10,21 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LimeLight2;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTarget extends CommandBase {
+public class TargetDistance extends CommandBase {
   private final Drivetrain drivetrain;
   private final LimeLight2 limeLight2;
 
   private final double steerK = 0.03;
-  private final double driveK = 0.26;
-  private final double desiredDistance = 10.0;
+  private double driveK = 0.35;
+  private final double desiredDistance = 12.0;
   private final double maxDrive = 0.7;
 
   /**
    * Creates a new Drive.
    */
-  public DriveTarget(Drivetrain drivetrain, LimeLight2 limeLight2) {
+  public TargetDistance(Drivetrain drivetrain, LimeLight2 limeLight2) {
     this.drivetrain = drivetrain;
     this.limeLight2 = limeLight2;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,17 +35,22 @@ public class DriveTarget extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("Distance K", this.driveK);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double driveCommand;
+    this.driveK = SmartDashboard.getNumber("Distance K", 1);
     if (this.limeLight2.hasTarget()) {
-      driveCommand = this.desiredDistance - this.limeLight2.getDistance() * this.driveK;
+      driveCommand = ((this.desiredDistance - this.limeLight2.getDistance()) * this.driveK) * 1.0;
+      SmartDashboard.putNumber("DRIVE COMMAND", driveCommand);
       driveCommand = driveCommand > maxDrive ? maxDrive : driveCommand;
       driveCommand = driveCommand < -maxDrive ? -maxDrive : driveCommand;
-      drivetrain.drive(-driveCommand, this.limeLight2.getX() * this.steerK);
+      drivetrain.drive(driveCommand, 0.0);
+    } else {
+      drivetrain.drive(0.0,0.0);
     }
   }
 

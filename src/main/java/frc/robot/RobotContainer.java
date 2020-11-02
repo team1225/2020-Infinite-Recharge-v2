@@ -33,6 +33,8 @@ import frc.robot.commands.DriveTarget;
 import frc.robot.commands.HopperIn;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
+import frc.robot.commands.TargetDistance;
+import frc.robot.commands.TargetSteer;
 import frc.robot.commands.WenchDown;
 import frc.robot.commands.WenchUp;
 
@@ -114,9 +116,12 @@ public class RobotContainer {
     new JoystickButton(joystick2, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(arm)); // A
     new JoystickButton(joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(hopper));
     new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
-    new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
-    new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
-    new POVButton(joystick, 180).whenPressed(new DriveTarget(new Drivetrain(), new LimeLight2()));
+    // new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
+    // new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
+    new POVButton(joystick, 180).whileHeld(new DriveTarget(new Drivetrain(), new LimeLight2())); 
+    new POVButton(joystick, 270).whileHeld(new TargetSteer(new Drivetrain(), new LimeLight2()));
+    new POVButton(joystick, 90).whileHeld(new TargetDistance(new Drivetrain(), new LimeLight2()));
+
     new JoystickButton(joystick, RobotMap.LEFT_STICK_BUTTON)
         .whenPressed(() -> drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
         .whenReleased(() -> drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));

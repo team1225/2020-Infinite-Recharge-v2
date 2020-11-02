@@ -67,6 +67,6 @@ public class LimeLight2 extends SubsystemBase {
 
   public double getDistance() {
     return (VisionConstants.targetHeight - VisionConstants.cameraHeight) 
-        /  Math.tan(VisionConstants.cameraAngle + getY());
+        /  Math.tan((VisionConstants.cameraAngle + getY()) * 3.1415 / 180);
   }
 }
