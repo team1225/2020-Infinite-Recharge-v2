@@ -29,6 +29,18 @@ public final class Constants {
 
     public static final int maxAmps = 50;
     public static final int maxSecAmps = 80;
+
+    public static final double kTurnP = 0.04;
+    public static final double kTurnI = 0.0;
+    public static final double kTurnD = 0.0;
+    public static final double kTurnToleranceDeg = 0.25;
+    public static final double kTurnRateToleranceDegPerS = 1.0;
+
+    public static final double kDistanceP = 0.35;
+    public static final double kDistanceI = 0.0;
+    public static final double kDistanceD = 0.0;
+    public static final double kDistanceToleranceFeet = 0.25;
+    public static final double kDistanceRateToleranceFeetPerS = 1.0;
   }
 
   public static final class WenchConstants {
@@ -57,5 +69,6 @@ public final class Constants {
     public static final double targetHeight = 9.0;
     public static final double cameraHeight = 1.0;
     public static final double cameraAngle = 43.0;
+    public static final double desiredDistanceToTarget = 10.0;
   }
 }

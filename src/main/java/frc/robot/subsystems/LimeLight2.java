@@ -24,47 +24,67 @@ public class LimeLight2 extends SubsystemBase {
   private double targetY;
   private double area;
   private boolean hasTarget;
-  private NetworkTable table;
+  private final NetworkTable table;
 
   public LimeLight2() {
     table = NetworkTableInstance.getDefault().getTable("limelight");
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //post to smart dashboard periodically
+    // post to smart dashboard periodically
     SmartDashboard.putNumber("LimelightX", getX());
     SmartDashboard.putNumber("LimelightY", getY());
     SmartDashboard.putNumber("LimelightArea", getArea());
     SmartDashboard.putBoolean("LimelightHasTarget", hasTarget());
     SmartDashboard.putNumber("LimelightDistance", getDistance());
   }
-  
+
+  /**
+   * Returns the horizontal angle the target is off from center.
+   * @return
+   */
   public double getX() {
-    NetworkTableEntry tx = table.getEntry("tx");
+    final NetworkTableEntry tx = table.getEntry("tx");
     targetX = tx.getDouble(0.0);
     return targetX;
   }
-  
+
+  /**
+   * Returns the vertical angle the target is off from center.
+   * @return
+   */
   public double getY() {
-    NetworkTableEntry ty = table.getEntry("ty");
+    final NetworkTableEntry ty = table.getEntry("ty");
     targetY = ty.getDouble(0.0);
     return targetY;
   }
-  
+
+  /**
+   * Returns the area of the target.
+   * @return
+   */
   public double getArea() {
-    NetworkTableEntry ta = table.getEntry("ta");
+    final NetworkTableEntry ta = table.getEntry("ta");
     area = ta.getDouble(0.0);
     return area;
   }
-  
+
+  /**
+   * Returns if the limelight has a target.
+   * @return
+   */
   public boolean hasTarget() {
-    NetworkTableEntry tv = table.getEntry("tv");
+    final NetworkTableEntry tv = table.getEntry("tv");
     hasTarget = tv.getDouble(0.0) == 1.0 ? true : false;
     return hasTarget;
   }
 
+  /**
+   * Returns the distance from the target.
+   * @return
+   */
   public double getDistance() {
     return (VisionConstants.targetHeight - VisionConstants.cameraHeight) 
         /  Math.tan((VisionConstants.cameraAngle + getY()) * 3.1415 / 180);
