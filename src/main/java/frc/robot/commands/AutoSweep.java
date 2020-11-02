@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
@@ -21,7 +22,7 @@ public class AutoSweep extends ParallelCommandGroup {
    */
   public AutoSweep(Drivetrain drivetrain, Arm arm, Hopper hopper) {
     // Add your commands in the super() call, e.g.
-    super(new DriveForward(drivetrain).withTimeout(3), new ArmPickup(arm),
+    super(new DriveForward(AutoConstants.speed, drivetrain).withTimeout(3), new ArmPickup(arm),
         new AutoHopperIn(hopper)); 
   }
 }

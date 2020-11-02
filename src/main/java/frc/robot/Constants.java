@@ -71,4 +71,9 @@ public final class Constants {
     public static final double cameraAngle = 43.0;
     public static final double desiredDistanceToTarget = 10.0;
   }
+
+  public static final class AutoConstants {
+    public static final double speed = 0.5;
+    public static final double fastSpeed = 0.75;
+  }
 }
