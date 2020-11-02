@@ -64,7 +64,7 @@ public class RobotContainer {
   
   private final Joystick joystick = new Joystick(0);
   private final Joystick joystick2 = new Joystick(1);
-  private SendableChooser<CommandSelector> sc = new SendableChooser<CommandSelector>();
+  private final SendableChooser<CommandSelector> sc = new SendableChooser<CommandSelector>();
   
   private enum CommandSelector {
     Simple, Advanced, AdvancedFast, Sweep
