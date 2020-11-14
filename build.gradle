@@ -2,6 +2,18 @@ plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2020.3.2"
     id 'jacoco'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion '8.37'
+    configFile file("config/checkstyle/checkstyle.xml")
+}
+checkstyleMain {
+    source ='src/main/java'
+}
+checkstyleTest {
+    source ='src/test/java'
 }
 
 sourceCompatibility = JavaVersion.VERSION_11

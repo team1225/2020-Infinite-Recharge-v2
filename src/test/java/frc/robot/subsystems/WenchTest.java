@@ -9,18 +9,13 @@ import static org.mockito.Mockito.verify;
 import com.team1225.helpers.MockButton;
 import com.team1225.helpers.MockHardwareExtension;
 import com.team1225.helpers.TestWithScheduler;
-
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 import frc.robot.commands.WenchDown;
 // import frc.robot.subsystems.Wench;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-// import frc.robot.subsystems.Wench;
 
 public class WenchTest {
 
