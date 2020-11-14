@@ -66,14 +66,19 @@ public final class Constants {
   }
 
   public static final class VisionConstants {
-    public static final double targetHeight = 9.0;
-    public static final double cameraHeight = 1.0;
-    public static final double cameraAngle = 43.0;
+    public static final double targetHeight = 6.9375;
+    public static final double cameraHeight = 2.083;
+    public static final double cameraAngle = 19.0;
     public static final double desiredDistanceToTarget = 10.0;
   }
 
   public static final class AutoConstants {
     public static final double speed = 0.5;
     public static final double fastSpeed = 0.75;
+  }
+
+  public static final class ShooterConstants {
+    public static final int leadMotorId = 5;
+    public static final int follerMotorId = 8;
   }
 }
