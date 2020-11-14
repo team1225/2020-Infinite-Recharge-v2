@@ -34,10 +34,10 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     maxSpeed = 1.0;
     // Get motors
-    leftMotor = new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
-    rightMotor = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
-    leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
-    rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
+    leftMotor = new CANSparkMax(DriveConstants.kLeftMotorPorts[0], MotorType.kBrushless);
+    rightMotor = new CANSparkMax(DriveConstants.kRightMotorPorts[0], MotorType.kBrushless);
+    leftFollower = new CANSparkMax(DriveConstants.kLeftMotorPorts[1], MotorType.kBrushless);
+    rightFollower = new CANSparkMax(DriveConstants.kRightMotorPorts[1], MotorType.kBrushless);
 
     //Set Following
     leftFollower.follow(leftMotor);

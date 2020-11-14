@@ -18,11 +18,9 @@ package frc.robot;
 public final class Constants {
 
   public static final class DriveConstants {
-    public static final int kLeftMotor1Port = 7;
-    public static final int kLeftMotor2Port = 6;
-    public static final int kRightMotor1Port = 10;
-    public static final int kRightMotor2Port = 4;
-
+    public static final int[] kLeftMotorPorts = new int[]{7, 6};
+    public static final int[] kRightMotorPorts = new int[]{10, 4};
+    
     public static final double kRampRate = 1.0; // Seconds to go from 0 to full speed
     public static final double kMaxHighSpeed = 1.0;
     public static final double kMaxLowSpeed = 0.25;
@@ -78,7 +76,19 @@ public final class Constants {
   }
 
   public static final class ShooterConstants {
-    public static final int leadMotorId = 5;
-    public static final int follerMotorId = 8;
+    public static final int[] motorPorts = new int[]{5, 8};
+
+    public static final double kShooterFreeRPS = 11000;
+    public static final double kShooterTargetRPS = 8000;
+    public static final double kShooterToleranceRPS = 50;
+
+    public static final double kP = 1;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
+    public static final double kSVolts = 0.05;
+    public static final double kVVoltSecondsPerRotation =
+        // Should have value 12V at free speed...
+        12.0 / kShooterFreeRPS;
   }
 }

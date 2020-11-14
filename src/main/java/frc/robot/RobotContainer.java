@@ -28,19 +28,19 @@ import frc.robot.commands.AutoAdvanced;
 import frc.robot.commands.AutoAdvancedFast;
 import frc.robot.commands.AutoSimple;
 import frc.robot.commands.AutoSweep;
-// import frc.robot.commands.ColorControl;
+import frc.robot.commands.ColorControl;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.HopperIn;
 import frc.robot.commands.HopperOut;
 import frc.robot.commands.Shoot;
-// import frc.robot.commands.RotationControl;
+import frc.robot.commands.RotationControl;
 import frc.robot.commands.TurnToTarget;
 import frc.robot.commands.WenchDown;
 import frc.robot.commands.WenchUp;
 
 import frc.robot.subsystems.Arm;
-// import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.LimeLight2;
@@ -60,7 +60,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Wench wench = new Wench();
   private final Drivetrain drivetrain = new Drivetrain();
-  // private final ColorWheel colorwheel = new ColorWheel();
+  private final ColorWheel colorwheel = new ColorWheel();
   private final Hopper hopper = new Hopper();
   private final Arm arm = new Arm();
   
@@ -102,6 +102,16 @@ public class RobotContainer {
     sc.addOption("Fast Advanced", CommandSelector.AdvancedFast);
     
     SmartDashboard.putData("Which Auto?", sc);
+
+    SmartDashboard.putData("Turn to target", new TurnToTarget(new Drivetrain(), new LimeLight2()));
+    SmartDashboard.putData("Drive to target", 
+        new DriveToTarget(VisionConstants.desiredDistanceToTarget, new Drivetrain(), new LimeLight2()));
+    SmartDashboard.putData("Turn and drive to target", new SequentialCommandGroup(
+      new TurnToTarget(new Drivetrain(), new LimeLight2()), 
+      new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
+          new Drivetrain(), new LimeLight2())));
+    SmartDashboard.putData("Color control", new ColorControl(colorwheel));
+    SmartDashboard.putData("Rotation control", new RotationControl(colorwheel));
   }
 
   /**
