@@ -29,6 +29,18 @@ public final class Constants {
 
     public static final int maxAmps = 50;
     public static final int maxSecAmps = 80;
+
+    public static final double kTurnP = 0.04;
+    public static final double kTurnI = 0.0;
+    public static final double kTurnD = 0.0;
+    public static final double kTurnToleranceDeg = 0.25;
+    public static final double kTurnRateToleranceDegPerS = 1.0;
+
+    public static final double kDistanceP = 0.35;
+    public static final double kDistanceI = 0.0;
+    public static final double kDistanceD = 0.0;
+    public static final double kDistanceToleranceFeet = 0.25;
+    public static final double kDistanceRateToleranceFeetPerS = 1.0;
   }
 
   public static final class WenchConstants {
@@ -51,5 +63,22 @@ public final class Constants {
   public static final class HopperConstants {
     public static final int kMotorPort = 0;
     public static final double kMaxSpeed = 1;
+  }
+
+  public static final class VisionConstants {
+    public static final double targetHeight = 6.9375;
+    public static final double cameraHeight = 2.083;
+    public static final double cameraAngle = 19.0;
+    public static final double desiredDistanceToTarget = 10.0;
+  }
+
+  public static final class AutoConstants {
+    public static final double speed = 0.5;
+    public static final double fastSpeed = 0.75;
+  }
+
+  public static final class ShooterConstants {
+    public static final int leadMotorId = 5;
+    public static final int follerMotorId = 8;
   }
 }

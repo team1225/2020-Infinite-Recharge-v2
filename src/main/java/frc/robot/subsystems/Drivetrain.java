@@ -21,11 +21,11 @@ import frc.robot.RobotMap;
 public class Drivetrain extends SubsystemBase {
   // private CANEncoder m_leftEncoder;
   // private CANEncoder m_rightEncoder;
-  private CANSparkMax leftMotor;
-  private CANSparkMax rightMotor;
-  private CANSparkMax leftFollower;
-  private CANSparkMax rightFollower;
-  private DifferentialDrive drive;
+  private final CANSparkMax leftMotor;
+  private final CANSparkMax rightMotor;
+  private final CANSparkMax leftFollower;
+  private final CANSparkMax rightFollower;
+  private final DifferentialDrive drive;
   private Double maxSpeed; 
 
   /**
@@ -66,16 +66,16 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Max Speed", maxSpeed);
   }
 
-  public void setMaxOutput(double maxOutput) {
+  public void setMaxOutput(final double maxOutput) {
     drive.setMaxOutput(maxOutput);
     maxSpeed = maxOutput;
   }
 
-  public void drive(Double speed, Double rotation) {
+  public void drive(final Double speed, final Double rotation) {
     drive.arcadeDrive(speed, rotation);
   }
   
-  public void drive(Joystick joystick) {
+  public void drive(final Joystick joystick) {
     drive.arcadeDrive(joystick.getY(), joystick.getRawAxis(RobotMap.X_RIGHT_STICK_X));
   }
 

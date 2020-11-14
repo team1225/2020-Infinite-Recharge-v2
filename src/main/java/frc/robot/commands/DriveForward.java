@@ -12,12 +12,14 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveForward extends CommandBase {
   private Drivetrain driveTrain;
+  private Double speed = 0.0;
   
   /**
    * Creates a new DriveForward.
    */
-  public DriveForward(Drivetrain driveTrain) {
+  public DriveForward(double speed, Drivetrain driveTrain) {
     this.driveTrain = driveTrain;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.driveTrain);
   }
@@ -31,7 +33,7 @@ public class DriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.drive(0.5, 0.0);
+    driveTrain.drive(speed, 0.0);
   }
 
   // Called once the command ends or is interrupted.

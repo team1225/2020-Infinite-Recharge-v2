@@ -8,35 +8,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
-public class DriveForwardFast extends CommandBase {
-  private Drivetrain driveTrain;
-  
+public class Shoot extends CommandBase {
+  private final Shooter shooter;
+  private double speed;
+
   /**
-   * Creates a new DriveForward.
+   * Creates a new Shoot.
    */
-  public DriveForwardFast(Drivetrain driveTrain) {
-    this.driveTrain = driveTrain;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.driveTrain);
+  public Shoot(double speed, final Shooter shooter) {
+    this.shooter = shooter;
+    this.speed = speed;
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    shooter.spin(this.speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.drive(0.75, 0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.stop();
   }
 
   // Returns true when the command should end.

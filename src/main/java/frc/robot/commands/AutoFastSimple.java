@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 
@@ -20,6 +21,7 @@ public class AutoFastSimple extends ParallelCommandGroup {
    */
   public AutoFastSimple(Drivetrain drivetrain, Arm arm) {
     // Add your commands in the super() call, e.g.
-    super(new DriveForwardFast(drivetrain).withTimeout(3), new ArmInitialize(arm)); 
+    super(new DriveForward(AutoConstants.fastSpeed, 
+        drivetrain).withTimeout(3), new ArmInitialize(arm)); 
   }
 }
