@@ -35,7 +35,6 @@ public class WenchTest {
     TestWithScheduler.schedulerStart();
     TestWithScheduler.schedulerClear();
     MockHardwareExtension.beforeAll();
-
     mockedWench = mock(Wench.class);
   }
 
