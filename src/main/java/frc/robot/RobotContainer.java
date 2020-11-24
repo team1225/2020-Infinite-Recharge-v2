@@ -33,8 +33,8 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.HopperIn;
 import frc.robot.commands.HopperOut;
-import frc.robot.commands.Shoot;
 import frc.robot.commands.RotationControl;
+import frc.robot.commands.Shoot;
 import frc.robot.commands.TurnToTarget;
 import frc.robot.commands.WenchDown;
 import frc.robot.commands.WenchUp;
@@ -105,10 +105,11 @@ public class RobotContainer {
 
     SmartDashboard.putData("Turn to target", new TurnToTarget(new Drivetrain(), new LimeLight2()));
     SmartDashboard.putData("Drive to target", 
-        new DriveToTarget(VisionConstants.desiredDistanceToTarget, new Drivetrain(), new LimeLight2()));
+        new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
+            new Drivetrain(), new LimeLight2()));
     SmartDashboard.putData("Turn and drive to target", new SequentialCommandGroup(
-      new TurnToTarget(new Drivetrain(), new LimeLight2()), 
-      new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
+        new TurnToTarget(new Drivetrain(), new LimeLight2()), 
+        new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
           new Drivetrain(), new LimeLight2())));
     SmartDashboard.putData("Color control", new ColorControl(colorwheel));
     SmartDashboard.putData("Rotation control", new RotationControl(colorwheel));
