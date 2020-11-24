@@ -11,9 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Constants.VisionConstants;
 
 public class LimeLight2 extends SubsystemBase {
@@ -43,7 +41,8 @@ public class LimeLight2 extends SubsystemBase {
 
   /**
    * Returns the horizontal angle the target is off from center.
-   * @return
+   *
+   * @return Double Target X axis degrees from center
    */
   public double getX() {
     final NetworkTableEntry tx = table.getEntry("tx");
@@ -53,7 +52,8 @@ public class LimeLight2 extends SubsystemBase {
 
   /**
    * Returns the vertical angle the target is off from center.
-   * @return
+   *
+   * @return Double Target Y axis degrees from center
    */
   public double getY() {
     final NetworkTableEntry ty = table.getEntry("ty");
@@ -63,7 +63,8 @@ public class LimeLight2 extends SubsystemBase {
 
   /**
    * Returns the area of the target.
-   * @return
+   *
+   * @return Double Area of target
    */
   public double getArea() {
     final NetworkTableEntry ta = table.getEntry("ta");
@@ -73,7 +74,8 @@ public class LimeLight2 extends SubsystemBase {
 
   /**
    * Returns if the limelight has a target.
-   * @return
+   *
+   * @return Boolean Does the limelight see a target
    */
   public boolean hasTarget() {
     final NetworkTableEntry tv = table.getEntry("tv");
@@ -83,7 +85,8 @@ public class LimeLight2 extends SubsystemBase {
 
   /**
    * Returns the distance from the target.
-   * @return
+   *
+   * @return Double distance in feet from the target
    */
   public double getDistance() {
     return (VisionConstants.targetHeight - VisionConstants.cameraHeight) 

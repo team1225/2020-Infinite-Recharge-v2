@@ -11,7 +11,6 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,6 +28,7 @@ public class Shooter extends PIDSubsystem {
   private final SimpleMotorFeedforward shooterFeedforward =
       new SimpleMotorFeedforward(ShooterConstants.kSVolts,
                                  ShooterConstants.kVVoltSecondsPerRotation);
+                                 
   /**
    * Creates a new Shooter.
    */

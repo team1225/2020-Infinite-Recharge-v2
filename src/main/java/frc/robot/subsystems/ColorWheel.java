@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
@@ -84,7 +83,7 @@ public class ColorWheel extends SubsystemBase {
   /**
    * Determines the closest color to the defined colors. Converts color to a
    * String representing the name of the color
-   * 
+   *
    * @return String color
    */
   public String getColor() {
@@ -109,6 +108,7 @@ public class ColorWheel extends SubsystemBase {
 
   /**
    * Returns the color assigned by the field.
+   *
    * @return String representing the full name of the color.
    */
   public String getAssignedColor() {

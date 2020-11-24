@@ -42,7 +42,7 @@ public class TurnToTarget extends PIDCommand {
     // Configure additional PID options by calling `getController` here.
     getController().enableContinuousInput(-180, 180);
     getController()
-      .setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
+        .setTolerance(DriveConstants.kTurnToleranceDeg, DriveConstants.kTurnRateToleranceDegPerS);
     this.limeLight = limeLight;
   }
 
