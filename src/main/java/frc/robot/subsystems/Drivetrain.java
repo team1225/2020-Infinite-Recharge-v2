@@ -44,20 +44,20 @@ public class Drivetrain extends SubsystemBase {
     rightFollower.follow(rightMotor);
 
     // Set ramp rate from constant (Seconds it takes to go from 0 to full speed)
-    leftMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
-    rightMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
-    leftFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
-    rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // leftMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // rightMotor.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // leftFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
+    // rightFollower.setOpenLoopRampRate(DriveConstants.kRampRate);
 
     // Get encoders
     // m_leftEncoder = m_leftMotor.getEncoder();
     // m_rightEncoder = m_rightMotor.getEncoder();
-    drive = new DifferentialDrive(leftMotor, rightMotor);
-
+    
     leftMotor.setIdleMode(IdleMode.kBrake);
     rightMotor.setIdleMode(IdleMode.kBrake);
     leftFollower.setIdleMode(IdleMode.kBrake);
     rightFollower.setIdleMode(IdleMode.kBrake);
+    drive = new DifferentialDrive(leftMotor, rightMotor);
   }
 
   @Override

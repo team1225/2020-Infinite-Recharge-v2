@@ -57,9 +57,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Wench wench = new Wench();
   private final Drivetrain drivetrain = new Drivetrain();
+  private final LimeLight2 limeLight = new LimeLight2();
   private final ColorWheel colorwheel = new ColorWheel();
   private final Hopper hopper = new Hopper();
   private final Arm arm = new Arm();
+  private final Shooter shooter = new Shooter();
   
   private final Joystick joystick = new Joystick(0);
   private final Joystick joystick2 = new Joystick(1);
@@ -100,16 +102,16 @@ public class RobotContainer {
     
     SmartDashboard.putData("Which Auto?", sc);
 
-    SmartDashboard.putData("Turn to target", new TurnToTarget(new Drivetrain(), new LimeLight2()));
-    SmartDashboard.putData("Drive to target", 
-        new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
-            new Drivetrain(), new LimeLight2()));
-    SmartDashboard.putData("Turn and drive to target", new SequentialCommandGroup(
-        new TurnToTarget(new Drivetrain(), new LimeLight2()), 
-        new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
-          new Drivetrain(), new LimeLight2())));
-    SmartDashboard.putData("Color control", new ColorControl(colorwheel));
-    SmartDashboard.putData("Rotation control", new RotationControl(colorwheel));
+    // SmartDashboard.putData("Turn to target", new TurnToTarget(drivetrain, limeLight));
+    // SmartDashboard.putData("Drive to target", 
+    //     new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
+    //         drivetrain, limeLight));
+    // SmartDashboard.putData("Turn and drive to target", new SequentialCommandGroup(
+    //     new TurnToTarget(drivetrain, limeLight), 
+    //     new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
+    //       drivetrain, limeLight)));
+    // SmartDashboard.putData("Color control", new ColorControl(colorwheel));
+    // SmartDashboard.putData("Rotation control", new RotationControl(colorwheel));
   }
 
   /**
@@ -120,22 +122,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(joystick2, RobotMap.BUTTON_A).whileHeld(new WenchDown(wench)); //B
-    new JoystickButton(joystick2, RobotMap.BUTTON_B).whileHeld(new WenchUp(wench)); //Y
-    new JoystickButton(joystick2, RobotMap.BUTTON_X).whileHeld(new ArmLoading(arm)); //X
-    new JoystickButton(joystick2, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(arm)); // A
-    new JoystickButton(joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(hopper));
-    new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
+    // new JoystickButton(joystick2, RobotMap.BUTTON_A).whileHeld(new WenchDown(wench)); //B
+    // new JoystickButton(joystick2, RobotMap.BUTTON_B).whileHeld(new WenchUp(wench)); //Y
+    // new JoystickButton(joystick2, RobotMap.BUTTON_X).whileHeld(new ArmLoading(arm)); //X
+    // new JoystickButton(joystick2, RobotMap.BUTTON_Y).whenPressed(new ArmPickup(arm)); // A
+    // new JoystickButton(joystick, RobotMap.LEFT_BUMPER).whenHeld(new HopperIn(hopper));
+    // new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
     // new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
     // new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
-    new POVButton(joystick, 0).whileHeld(new Shoot(0.9, new Shooter()));
+    new POVButton(joystick, 0).whileHeld(new Shoot(5000, shooter));
     new POVButton(joystick, 90).whileHeld(new DriveToTarget(VisionConstants.desiredDistanceToTarget,
-        new Drivetrain(), new LimeLight2()));
+        drivetrain, limeLight));
     new POVButton(joystick, 180).whileHeld(new SequentialCommandGroup(
-        new TurnToTarget(new Drivetrain(), new LimeLight2()), 
+        new TurnToTarget(drivetrain, limeLight), 
         new DriveToTarget(VisionConstants.desiredDistanceToTarget, 
-            new Drivetrain(), new LimeLight2()))); 
-    new POVButton(joystick, 270).whileHeld(new TurnToTarget(new Drivetrain(), new LimeLight2()));
+        drivetrain, limeLight))); 
+    new POVButton(joystick, 270).whileHeld(new TurnToTarget(drivetrain, limeLight));
     new JoystickButton(joystick, RobotMap.LEFT_STICK_BUTTON)
         .whenPressed(() -> drivetrain.setMaxOutput(DriveConstants.kMaxLowSpeed))
         .whenReleased(() -> drivetrain.setMaxOutput(DriveConstants.kMaxHighSpeed));
