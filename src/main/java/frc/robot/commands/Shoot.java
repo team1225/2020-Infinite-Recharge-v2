@@ -26,8 +26,7 @@ public class Shoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setSetpoint(this.speed);
-    shooter.enable();
+    shooter.run(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,7 +37,7 @@ public class Shoot extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.disable();
+    shooter.stop();
   }
 
   // Returns true when the command should end.

@@ -14,10 +14,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
-public class Shooter extends PIDSubsystem {
+public class Shooter extends SubsystemBase {
   private final CANSparkMax leadMotor = 
       new CANSparkMax(ShooterConstants.motorPorts[0], MotorType.kBrushless);
   private final CANSparkMax followerMotor = 
@@ -33,27 +33,10 @@ public class Shooter extends PIDSubsystem {
    * Creates a new Shooter.
    */
   public Shooter() {
-    super(
-        // The PIDController used by the subsystem
-        new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD));
-
     followerMotor.follow(leadMotor);
 
     leadMotor.setIdleMode(IdleMode.kCoast);
     followerMotor.setIdleMode(IdleMode.kCoast);
-
-    getController().setTolerance(ShooterConstants.kShooterToleranceRPS);
-    // setSetpoint(ShooterConstants.kShooterTargetRPS);
-  }
-
-  @Override
-  public void useOutput(double output, double setpoint) {
-    leadMotor.setVoltage(output + shooterFeedforward.calculate(setpoint));
-  }
-
-  @Override
-  public double getMeasurement() {
-    return leadEncoder.getVelocity();
   }
 
   @Override
@@ -62,10 +45,13 @@ public class Shooter extends PIDSubsystem {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Lead Encoder - Velocity", leadEncoder.getVelocity());
     SmartDashboard.putNumber("Follower Encoder - Velocity", followerEncoder.getVelocity());
-    SmartDashboard.putBoolean("Shooter at setpoint", atSetpoint());
   }
 
-  public boolean atSetpoint() {
-    return m_controller.atSetpoint();
+  public void run(Double speed) {
+    leadMotor.set(speed);
+  }
+
+  public void stop() {
+    leadMotor.set(0);
   }
 }

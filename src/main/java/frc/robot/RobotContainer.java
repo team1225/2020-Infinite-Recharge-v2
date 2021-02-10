@@ -35,15 +35,12 @@ import frc.robot.commands.HopperOut;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TurnToTarget;
-import frc.robot.commands.WenchDown;
-import frc.robot.commands.WenchUp;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.LimeLight2;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Wench;
 import java.util.Map;
 
 
@@ -55,7 +52,6 @@ import java.util.Map;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Wench wench = new Wench();
   private final Drivetrain drivetrain = new Drivetrain();
   private final LimeLight2 limeLight = new LimeLight2();
   private final ColorWheel colorwheel = new ColorWheel();
@@ -130,7 +126,7 @@ public class RobotContainer {
     // new JoystickButton(joystick, RobotMap.RIGHT_BUMPER).whenHeld(new HopperOut(hopper));
     // new POVButton(joystick, 270).whenPressed(new ColorControl(colorwheel));
     // new POVButton(joystick, 90).whenPressed(new RotationControl(colorwheel));
-    new POVButton(joystick, 0).whileHeld(new Shoot(5000, shooter));
+    new POVButton(joystick, 0).whileHeld(new Shoot(1.0, shooter));
     new POVButton(joystick, 90).whileHeld(new DriveToTarget(VisionConstants.desiredDistanceToTarget,
         drivetrain, limeLight));
     new POVButton(joystick, 180).whileHeld(new SequentialCommandGroup(
